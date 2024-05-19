@@ -1,0 +1,104 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>금상추</title>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=98ddec0c92a6954c9df64f11e641b082"></script>
+    <style>
+        #map {
+            width: 100%;
+            height: 1000px;
+        }
+    </style>
+</head>
+<body>
+    <h1>카카오 지도 예제</h1>
+    <form id="filter-form">
+        <label for="city">지역1:</label>
+        <select name="city" id="city">
+            <option value="서울특별시">서울특별시</option>
+            <option value="부산광역시">부산광역시</option>
+            <!--다른 지역 추가하기-->
+        </select>
+        <label for="district">지역2:</label>
+        <select id="district" name="district">
+            <option value="강남구">강남구</option>
+            <option value="서초구">서초구</option>
+            <!--다른 지역 추가하기-->
+        </select>
+        <label for="name">은행:</label>
+        <select id="name" name="name">
+            <option value="국민은행">국민은행</option>
+            <option value="신한은행">신한은행</option>
+            <!-- 다른 은행 추가 -->
+        </select>
+        <button type="submit">검색</button>
+    </form>
+
+    <div id="map"></div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var mapContainer = document.getElementById('map'), 
+                mapOption = { 
+                    center: new kakao.maps.LatLng(37.5665, 126.9780), // 서울 중심좌표
+                    level: 8 
+                };
+
+            var map = new kakao.maps.Map(mapContainer, mapOption);
+
+            var markerImageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png',
+            // 내가 가진 makerImg로 넣어줘야함
+                markerImageSize = new kakao.maps.Size(64, 69),
+                markerImageOption = {offset: new kakao.maps.Point(27, 69)},
+                markerImage = new kakao.maps.MarkerImage(markerImageSrc, markerImageSize, markerImageOption);
+
+            var markers = [];
+
+            document.getElementById('filter-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                var city = document.getElementById('city').value;
+                var district = document.getElementById('district').value;
+                var name = document.getElementById('name').value;
+
+                var query = city + ' ' + district + ' ' + name;
+
+                // 카카오 장소 검색 API 호출
+                fetch(`https://dapi.kakao.com/v2/local/search/keyword.json?query=${query}`, {
+                    headers: {
+                        'Authorization': 'KakaoAK 053d9b9ffc2deb571c11f5fb73bdbeb2'
+                    }
+                })
+                .then(response => response.json())      
+                .then(data => {
+                    // 기존 마커 제거
+                    markers.forEach(marker => marker.setMap(null));
+                    markers = [];
+                    console.log('data는 지금',data)
+                    console.log('data의 documents는 지금',data.documents)
+                    data.documents.forEach(bank => {
+                        var markerPosition = new kakao.maps.LatLng(bank.y, bank.x);
+                        var marker = new kakao.maps.Marker({
+                            position: markerPosition,
+                            title: bank.name,
+                            image: markerImage
+                        });
+                        marker.setMap(map);
+                        markers.push(marker);
+                    });
+                    if (data.documents.length > 0) {
+                        map.setCenter(new kakao.maps.LatLng(data.documents[0].y, data.documents[0].x));
+                        map.setLevel(4); // 지도 확대 레벨
+                    }
+                })
+                .catch(error => {
+                    console.error('There has been a problem with your fetch operation:', error);
+                });
+            });
+        });
+    </script>
+    <div id="result"></div>
+</body>
+</html>
