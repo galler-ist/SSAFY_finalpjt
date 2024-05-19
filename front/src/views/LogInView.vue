@@ -1,5 +1,5 @@
 <template>
-  <div class="login" style="background-color : #F6F1FF">
+  <div class="login " style="background-color : #F6F1FF">
     <div class="card m-auto" style="width: 30rem;">
       <div class="card-body">
         <h5 class="card-title loginblank">Log In</h5>
