@@ -7,10 +7,14 @@
       <hr>
       <p>{{ article.content }}</p>
       <p>{{ article.like }}</p>
+      <!-- <button class="btn" @click="toggleLike">
+        {{ article.like ? 'Unlike' : 'Like' }}
+      </button> -->
+
     </div>
     <button class="btn"><RouterLink :to="{ name: 'ArticleView' }">목록</RouterLink></button>
-    <button class="btn" v-if="!isOwner" @click="goToUpdateView">Update Article</button>
-    <button class="btn" v-if="!isOwner" @click="deleteArticle">Delete Article</button>
+    <button class="btn" v-if="isOwner" @click="goToUpdateView">Update Article</button>
+    <button class="btn" v-if="isOwner" @click="deleteArticle">Delete Article</button>
     <hr>
     <div v-if="comments.length">
       <ul>
@@ -47,12 +51,7 @@ const article = ref(null)
 const comments = ref([])
 const newComment = ref('')
 const isOwner = ref(false)
-watch(() => store.username, (newUsername) => {
-  if (article.value) {
-    // console.log(store.username)
-    isOwner.value = article.value.username === newUsername
-  }
-})
+
 onMounted(() => {
   fetchArticle()
   fetchComments()
@@ -66,11 +65,6 @@ const fetchArticle = () => {
   })
   .then(response => {
     article.value = response.data
-    // const articleUser = String(article.value.user).trim().toLowerCase()
-    // const storeUser = store.username.trim().toLowerCase()
-    // isOwner.value = articleUser === storeUser
-    console.log(article.value.username)
-    console.log(store.username) // 이거 로그인에서 넘어오는 username인데 왜 undefined로 나오지????????? 이게 안되서 update 버튼이 안나오는 거같은데
     isOwner.value = article.value.username === store.username
   })
   .catch(error => {
@@ -78,19 +72,37 @@ const fetchArticle = () => {
   })
 }
 
-const deleteArticle = async () => {
-  try {
-    await axios.delete(`${store.API_URL}/api/v1/articles/${route.params.id}/`, {
-      headers: {
-        Authorization: `Token ${store.token}`
-      }
-    })
-    router.push({ name: 'HomeView' }) // 글 삭제 후 홈으로 이동
-  } catch (error) {
+
+const deleteArticle = () => {
+  axios.delete(`${store.API_URL}/api/v1/articles/${route.params.id}/`, {
+    headers: {
+      Authorization: `Token ${store.token}`
+    }
+  })
+  .then(() => {
+    router.push({ name: 'HomeView' })
+  })
+  .catch(error => {
     console.error(error)
-  }
+    console.log(route.params.id)
+  })
 }
 
+
+const deleteComment = (commentId) => {
+  axios.delete(`${store.API_URL}/api/v1/comments/${commentId}/`, {
+    headers: {
+      Authorization: `Token ${store.token}`
+    }
+  })
+  .then(() => {
+    comments.value = comments.value.filter(comment => comment.id !== commentId)
+    console.log(commentId)
+  })
+  .catch(error => {
+    console.error(error)
+  })
+}
 const fetchComments = () => {
   axios.get(`${store.API_URL}/api/v1/articles/${route.params.id}/comments/`, {
     headers: {
@@ -122,29 +134,31 @@ const addComment = () => {
   })
 }
 
-const deleteComment = (commentId) => {
-  axios.delete(`${store.API_URL}/api/v1/comments/${commentId}/`, {
-    headers: {
-      Authorization: `Token ${store.token}`
-    }
-  })
-  .then(() => {
-    comments.value = comments.value.filter(comment => comment.id !== commentId)
-  })
-  .catch(error => {
-    console.error(error)
-  })
-}
 
 const goToUpdateView = () => {
   router.push({ name: 'UpdateView', params: { id: route.params.id } })
 }
 
+// const toggleLike = () => {
+//   axios.patch(`${store.API_URL}/api/v1/articles/${route.params.id}/`, {
+//     like: !article.value.like
+//   }, {
+//     headers: {
+//       Authorization: `Token ${store.token}`
+//     }
+//   })
+//   .then(response => {
+//     article.value.like = true
+//   })
+//   .catch(error => {
+//     console.error(error)
+//   })
+// }
+
 </script>
 
 <style>
 .img {
-  position:relative;
   width: 60%;
   height: 20rem;
   margin-left: 20%;
