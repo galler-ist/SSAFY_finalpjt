@@ -1,22 +1,28 @@
 <template>
-  <div>
-    <h1>회원가입</h1>
-    <form @submit.prevent="signUp">
-      <div>
-        <label for="username">username : </label>
-        <input type="text" v-model.trim="username" id="username">
+  <div class="login " style="background-color : #F6F1FF">
+    <div class="card m-auto" style="width: 30rem;">
+      <div class="card-body">
+        <h5 class="card-title loginblank">회원가입</h5>
+        <form class="card-text" @submit.prevent="signUp">
+          <div class="idblank">
+            <label for="username">ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <input type="text" v-model.trim="username" id="username">
+          </div>
+          <div class="passwordblank">
+            <label for="password">PASSWORD&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <input type="password" v-model.trim="password1" id="password">
+          </div>
+          <div class="passwordblank">
+            <label for="password">PASSWORD CONFIRM&nbsp;</label>
+            <input type="password" v-model.trim="password2" id="password">
+          </div>
+          <input class="btn btn-primary w-100 inputblank" type="submit" value="Sign In">
+        </form>
+        <hr>
       </div>
-      <div>
-        <label for="password1">password : </label>
-        <input type="password" v-model.trim="password1" id="password1">
-      </div>
-      <div>
-        <label for="password2">password confirmation : </label>
-        <input type="password" v-model.trim="password2" id="password2">
-      </div>
-      <input type="submit">
-    </form>
+    </div>
   </div>
+
 </template>
 
 <script setup>
@@ -40,5 +46,20 @@ const signUp = function () {
 </script>
 
 <style>
-
+.login {
+  text-align: center;
+}
+.loginblank {
+  padding: 2rem;
+  
+}
+.idblank {
+  padding: 1rem;
+}
+.passwordblank {
+  padding-bottom: 1rem;
+}
+.inputblank {
+  padding: 2rem;
+}
 </style>
