@@ -8,6 +8,9 @@ import HomeView from '@/views/HomeView.vue'
 import BankView from '@/views/BankView.vue'
 import ExchangeView from '@/views/ExchangeView.vue'
 import UpdateView from '@/views/UpdateView.vue'
+import FinanceView from '@/views/FinanceView.vue'
+import DepositList from '@/components/DepositList.vue'
+import SavingList from '@/components/SavingList.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -57,6 +60,26 @@ const router = createRouter({
       name: 'ExchangeView',
       component: ExchangeView
     },
+    {
+      path: '/finance',
+      name: 'FinanceView',
+      component: FinanceView,
+      children: [
+        {
+          path: 'deposit',
+          name: 'DepositList',
+          component: DepositList
+        },
+        {
+          path: 'saving',
+          name: 'SavingList',
+          component: SavingList
+        }
+      ]
+    },{
+      path: '/finance',
+      redirect: '/finance/deposit'
+    }
   ]
 })
 
