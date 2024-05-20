@@ -7,6 +7,7 @@ import LogInView from '@/views/LogInView.vue'
 import HomeView from '@/views/HomeView.vue'
 import BankView from '@/views/BankView.vue'
 import ExchangeView from '@/views/ExchangeView.vue'
+import UpdateView from '@/views/UpdateView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -40,6 +41,11 @@ const router = createRouter({
       path: '/login',
       name: 'LogInView',
       component: LogInView
+    },
+    {
+      path: '/articles/:id/update',
+      name: 'UpdateView',
+      component: UpdateView
     },
     {
       path: '/bank',

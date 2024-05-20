@@ -17,13 +17,12 @@ from .models import Article, Comment
 def article_list(request):
     if request.method == 'GET':
         articles = get_list_or_404(Article)
-        serializer = ArticleListSerializer(articles, many=True)
+        serializer = ArticleSerializer(articles, many=True)
         return Response(serializer.data)
 
     elif request.method == 'POST':
         serializer = ArticleSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
-            # serializer.save()
             serializer.save(user=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
@@ -34,8 +33,31 @@ def article_detail(request, article_pk):
 
     if request.method == 'GET':
         serializer = ArticleSerializer(article)
-        print(serializer.data)
         return Response(serializer.data)
+
+
+@api_view([ 'PUT', 'DELETE'])
+@permission_classes([IsAuthenticated])
+def article_update_delete(request, article_pk):
+    article = get_object_or_404(Article, pk=article_pk)
+    # if request.method == 'GET':
+    #     serializer = ArticleSerializer(article)
+    #     return Response(serializer.data)
+    
+    if request.method == 'PUT':
+        if article.user != request.user:
+            return Response({'error': 'Permission denied'}, status=status.HTTP_403_FORBIDDEN)
+        serializer = ArticleSerializer(article, data=request.data, partial=True)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        if article.user != request.user:
+            return Response({'error': 'Permission denied'}, status=status.HTTP_403_FORBIDDEN)
+        article.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 @api_view(['POST', 'GET'])

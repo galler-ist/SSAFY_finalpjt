@@ -1,5 +1,7 @@
 <template>
   <div style="background-color : #F6F1FF">
+    <img class="img" src="/assets/grand.png" alt="...">
+    <div class="all">
     <h1 class="p-5 fw-bold" style="color : #702828">나에게 맞는 상품 추천</h1>
     <div>
       <div id="carouselExampleIndicators" class="carousel slide">
@@ -33,6 +35,7 @@
   <footer class="footerstyle">
     <p>somethingsomethingsomethingsomethingsomethingsomethingsomethingsomething</p>
   </footer>
+</div>
 </template>
 
 <script setup>
@@ -44,6 +47,17 @@
 padding: 3rem;
 background-color: rgb(146, 157, 177);
 text-align: center;
+}
 
+.all {
+  margin: 10rem;
+  margin-top: 0;
+}
+
+.img {
+  position:relative;
+  width: 90%;
+  height: 20rem;
+  margin-left: 5%;
 }
 </style>
