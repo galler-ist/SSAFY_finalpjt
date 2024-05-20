@@ -1,4 +1,6 @@
 <template>
+    <img class="bg" src="/assets/map_bg.png" alt="...">
+
     <div class="bank-container">
       <h1>카카오 지도 예제</h1>
       <button @click="showCurrentLocation">현재 나의 위치로 보기</button>
@@ -312,5 +314,14 @@
     text-align: center;
     padding: 0 auto;
   }
-  /* 필요에 따라 CSS 스타일 추가 */
+  .bg {
+    width: 100%;
+    height: 20rem;
+    opacity: 0.7;
+  }
+  </style>
+  <style>
+  .font {
+    font-family: 'NPSfont_regular';
+  }
   </style>
