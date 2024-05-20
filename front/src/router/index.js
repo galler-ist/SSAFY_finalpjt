@@ -6,6 +6,7 @@ import SignUpView from '@/views/SignUpView.vue'
 import LogInView from '@/views/LogInView.vue'
 import HomeView from '@/views/HomeView.vue'
 import BankView from '@/views/BankView.vue'
+import ExchangeView from '@/views/ExchangeView.vue'
 import UpdateView from '@/views/UpdateView.vue'
 
 const router = createRouter({
@@ -50,6 +51,11 @@ const router = createRouter({
       path: '/bank',
       name: 'BankView',
       component: BankView
+    },
+    {
+      path: '/exchange',
+      name: 'ExchangeView',
+      component: ExchangeView
     },
   ]
 })
