@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg bg-body-lg">
+  <nav class="navbar navbar-expand-lg bg-body-lg all">
     <div class="container-fluid">
       <RouterLink class="navbar-brand" style="color : #702828" :to="{ name: 'HomeView' }">Home</RouterLink>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -13,7 +13,7 @@
         <div class="navbar-nav ms-auto">
           <RouterLink class="nav-link" style="color : #702828" v-if="!isLogin" :to="{ name: 'SignUpView' }">Sign In</RouterLink>
           <RouterLink class="nav-link" style="color : #702828" v-if="!isLogin" :to="{ name: 'LogInView' }">Log In</RouterLink>
-          <button class="nav-link btn btn-link" style="color : #702828" v-else @click="logOut">Log Out</button>
+          <input class="nav-link btn input-link" style="color : #702828" v-else @click="logOut" :to="{ name: 'LogInView' }" value="Log Out">
         </div>
       </div>
     </div>
@@ -35,4 +35,9 @@ const logOut = () => {
 </script>
 
 <style scoped>
+.all{
+  margin: 5rem;
+  margin-top: 0;
+  margin-bottom: 0;
+}
 </style>

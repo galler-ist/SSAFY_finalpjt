@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h1>Article Page</h1>
+  <div class="img">
+    <h1>게시판</h1>
     <RouterLink :to="{ name: 'CreateView' }">
       [CREATE]
     </RouterLink>
@@ -23,5 +23,13 @@ onMounted(() => {
 </script>
 
 <style>
-
+.img {
+  position:relative;
+  width: 80%;
+  height: 20rem;
+  margin-left: 10%;
+}
+.background {
+    background-color: #F6F1FF;
+}
 </style>
