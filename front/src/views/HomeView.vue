@@ -1,6 +1,9 @@
 <template>
+  <div>
+    <img class="img" src="/assets/map_bg.png" alt="...">
+  </div>
   <div style="background-color : #F6F1FF">
-    <img class="img" src="/assets/grand.png" alt="...">
+    <!-- <img class="img" src="/assets/grand.png" alt="..."> -->
     <div class="all">
     <h1 class="p-5 fw-bold" style="color : #702828">나에게 맞는 상품 추천</h1>
     <div>

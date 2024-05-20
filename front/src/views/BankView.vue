@@ -1,4 +1,6 @@
 <template>
+    <img class="bg" src="/assets/map_bg.png" alt="...">
+
     <div>
       <h1>카카오 지도 예제</h1>
       <form id="filter-form" @submit.prevent="searchBank">
@@ -199,6 +201,14 @@
     height: 1000px;
     padding: 300px;
   }
-  /* 필요에 따라 CSS 스타일 추가 */
+  .bg {
+    width: 100%;
+    height: 20rem;
+    opacity: 0.7;
+  }
   </style>
-  
+  <style>
+  .font {
+    font-family: 'NPSfont_regular';
+  }
+  </style>

@@ -5,7 +5,7 @@
       <tr class="">
         <td width="250px" class="">{{ article.username }}</td>
         <td width="668px" class=""><RouterLink :to="{ name: 'DetailView', params: { id: article.id }}">{{ article.title }}</RouterLink></td>
-        <td width="202px" class="">{{ article.created_at }}</td>
+        <td width="202px" class="">{{ article.created_at.substring(0, 10) }}</td>
       </tr>
     </tbody> 
   </div>
