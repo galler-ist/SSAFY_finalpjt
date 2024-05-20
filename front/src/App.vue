@@ -9,6 +9,7 @@
         <div class="navbar-nav me-auto">
 
           <RouterLink class="nav-link" style="color : #702828" :to="{ name: 'ArticleView' }">Articles</RouterLink>
+          <RouterLink class="nav-link" style="color : #702828" :to="{ name: 'BankView' }">Bank</RouterLink>
         </div>
         <div class="navbar-nav ms-auto">
           <RouterLink class="nav-link" style="color : #702828" v-if="!isLogin" :to="{ name: 'SignUpView' }">Sign In</RouterLink>
