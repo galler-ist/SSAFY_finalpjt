@@ -17,7 +17,6 @@ class Deposit(models.Model):
     max_limit = models.IntegerField(blank=True, null=True)
     contract_user = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='contract_deposit')
 
-
 class Saving(models.Model):
     saving_code = models.CharField(max_length=100) # fin_prdt_cd 
     fin_co_no = models.CharField(max_length=100)

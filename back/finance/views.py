@@ -31,7 +31,7 @@ def make_financial_data(request):
             'join_member': base.get('join_member', '-1'),
             'join_way': base.get('join_way', '-1'),
             'spcl_cnd': base.get('spcl_cnd', '-1'),
-            'max_limit': base.get('max_limit', -1),            
+            'max_limit': base.get('max_limit', -1),         
         }
         serializer = DepositSerializer(data=save_product)
         if serializer.is_valid(raise_exception=True):
@@ -42,7 +42,8 @@ def make_financial_data(request):
         product = Deposit.objects.get(deposit_code=prdt_cd)
         save_option = {
             'intr_rate_type_nm': option.get('intr_rate_type_nm', '-1'),
-            'intr_rate': option.get('intr_rate', -1), # if option.get('intr_rate', -1) else -1,
+            'rsrv_type_nm': option.get('rsrv_type_nm', '-1'),
+            'intr_rate': option.get('intr_rate', -1), 
             'intr_rate2': option.get('intr_rate2', -1),
             'save_trm': option.get('save_trm', -1),
         }
@@ -82,7 +83,7 @@ def make_financial_data(request):
         save_option = {
             'intr_rate_type_nm': option.get('intr_rate_type_nm', '-1'),
             'rsrv_type_nm': option.get('rsrv_type_nm', '-1'),
-            'intr_rate': option.get('intr_rate', -1), # if option.get('intr_rate', -1) else -1,
+            'intr_rate': option.get('intr_rate', -1),
             'intr_rate2': option.get('intr_rate2', -1),
             'save_trm': option.get('save_trm', -1),
         }
@@ -90,18 +91,33 @@ def make_financial_data(request):
         serializer = SavingOptionSerializer(data=save_option)
         if serializer.is_valid(raise_exception=True):
             serializer.save(saving=product)
-    print('deposit_baseList는 말야~~~', deposit_baseList)
     return HttpResponse("금융 데이터 생성 완료")
 
 
 @api_view(['GET'])
 def deposit(request):
     deposits = Deposit.objects.all()
-    serializer = DepositSerializer(deposits, many=True)
-    return Response(serializer.data)
+    result = []
+    for deposit in deposits:
+        serializer = DepositSerializer(deposit)
+        options = DepositOption.objects.filter(deposit=deposit)
+        option_serializer = DepositOptionSerializer(options, many=True)
+        result.append({
+            'base': serializer.data,
+            'options': option_serializer.data            
+        })
+    return Response(result)
 
 @api_view(['GET'])
 def savings(request):
     savings = Saving.objects.all()
-    serializer = SavingSerializer(savings, many=True)
-    return Response(serializer.data)
+    result = []
+    for saving in savings:
+        serializer = SavingSerializer(saving)
+        options = SavingOption.objects.filter(saving=saving)
+        option_serializer = SavingOptionSerializer(options, many=True)
+        result.append({
+            'base': serializer.data,
+            'options': option_serializer.data
+        })
+    return Response(result)

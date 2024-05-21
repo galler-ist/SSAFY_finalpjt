@@ -9,7 +9,7 @@ from .serializers import ExchangeSerializer
 # Create your views here.
 
 
-EXCHANGE_API_URL = f'https://www.koreaexim.go.kr/site/program/financial/exchangeJSON?authkey=bQejh15dx4FXuA52WqlekvGRQMuVomFU&data=AP01'
+EXCHANGE_API_URL = f'https://www.koreaexim.go.kr/site/program/financial/exchangeJSON?authkey=bQejh15dx4FXuA52WqlekvGRQMuVomFU&searchdata=20240519&data=AP01'
 
 @api_view(['GET'])
 def index(request):
@@ -20,6 +20,9 @@ def index(request):
     except requests.RequestException as e:
         print(f"Error fetching data from API: {e}")
         return Response({"error": "Error fetching data from API"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    if not isinstance(data, list):
+        return Response({"error": "Invalid data format"}, status=status.HTTP_400_BAD_REQUEST)
 
     exist_response = Exchange.objects.all()
     
