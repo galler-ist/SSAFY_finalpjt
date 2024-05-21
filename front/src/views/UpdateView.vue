@@ -1,16 +1,18 @@
 <template>
   <div>
-    <h1>게시글 수정</h1>
+    <h1 class="sample-text">게시글 수정</h1>
     <form @submit.prevent="updateArticle">
-      <div>
-        <label for="title">제목 : </label>
-        <input type="text" v-model.trim="title" id="title">
+    <div class="article-container">
+        <div class="title-container">
+          <label for="title">제목 : </label>
+          <input class="title-text" type="text" v-model.trim="title" id="title">
+        </div>
+        <div class="content-container">
+          <label for="content">내용</label>
+          <textarea class="content-text" v-model.trim="content" id="content"></textarea>
+        </div>
+        <button class="btn w-100" type="submit" value="수정하기">수정하기</button>
       </div>
-      <div>
-        <label for="content">내용 : </label>
-        <textarea v-model.trim="content" id="content"></textarea>
-      </div>
-      <input type="submit" value="수정하기">
     </form>
   </div>
 </template>
@@ -63,6 +65,33 @@ const updateArticle = async () => {
 }
 </script>
 
-<style>
-/* Add your styles here */
+<style scoped>
+.article-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  padding:0;
+  width: 65%;
+}
+.sample-text {
+  padding: 7rem 0rem 3rem 0rem;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bolder;
+}
+.title-container {
+  width:100%;
+  padding: 1rem 0rem;
+}
+.title-text {
+  width: 90%;
+}
+.content-container {
+  width:100%;
+}
+.content-text {
+  width: 100%;
+  height: 30rem;
+}
 </style>

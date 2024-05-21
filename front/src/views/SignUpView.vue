@@ -1,8 +1,9 @@
 <template>
-  <div class="login " style="background-color : #F6F1FF">
+  <h1 class="sample-text">GeumSangChu</h1>
+  <div class="login ">
     <div class="card m-auto" style="width: 30rem;">
       <div class="card-body">
-        <h5 class="card-title loginblank">회원가입</h5>
+        <h4 class="card-title loginblank">회원가입</h4>
         <form class="card-text" @submit.prevent="signUp">
           <div class="idblank">
             <label for="username">ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
@@ -16,7 +17,7 @@
             <label for="password">PASSWORD CONFIRM&nbsp;</label>
             <input type="password" v-model.trim="password2" id="password">
           </div>
-          <input class="btn btn-primary w-100 inputblank" type="submit" value="Sign In">
+          <button class="btn w-100 inputblank" type="submit" value="Log In"> Sign Up </button>
         </form>
         <hr>
       </div>
@@ -61,5 +62,41 @@ const signUp = function () {
 }
 .inputblank {
   padding: 2rem;
+}
+
+
+
+.sample-text {
+  padding: 7rem 0rem 3rem 0rem;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bolder;
+}
+.login {
+  text-align: center;
+}
+.loginblank {
+  padding: 2rem;
+  
+}
+.idblank {
+  padding: 1rem;
+}
+.passwordblank {
+  padding: 0rem 0rem 1rem 0rem;
+}
+.inputblank {
+  padding: 2rem;
+  display: flex;
+}
+.card-text-my {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width:auto;
+}
+.form-flex {
+  display: flex;
+  align-items: center;
 }
 </style>

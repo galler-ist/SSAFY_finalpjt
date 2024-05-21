@@ -92,7 +92,10 @@ onMounted(() => {
 }
 
 .cate {
+  margin:10px;
+  padding:1rem;
   border-bottom: 2px solid rgb(166, 166, 166);
+  border-top: 2px solid rgb(166, 166, 166);
 }
 
 .cate th {
