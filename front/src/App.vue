@@ -1,7 +1,7 @@
 <template>
-  <nav class="navbar navbar-expand-lg bg-body-lg custom-navbar font">
+  <nav class="navbar navbarbottom navbar-expand-lg bg-body-lg custom-navbar font">
     <div class="container-fluid">
-      <RouterLink class="navbar-brand" :to="{ name: 'HomeView' }">Home</RouterLink>
+      <RouterLink class="navbar-brand" style="color: yellow" :to="{ name: 'HomeView' }">GeumSangChu</RouterLink>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -20,6 +20,9 @@
     </div>
   </nav>
   <RouterView />
+  <footer class="footerstyle">
+    <p>somethingsomethingsomethingsomethingsomethingsomethingsomethingsomething</p>
+  </footer>
 </template>
 
 <script setup>
@@ -44,9 +47,9 @@ const logOut = () => {
   position: fixed;
   top: 0;
   left: 0;
-  background-color: transparent; /* 기본 상태에서 투명 */
+  background-color: rgb(75, 75, 75);/* 기본 상태에서 투명 */
   z-index: 1; /* 다른 요소들 위에 표시 */
-  transition: background-color 0.3s ease, color 0.3s ease; /* 배경색과 글자색 변환 애니메이션 */
+  transition: background-color 0.5s ease, color 0.5s ease; /* 배경색과 글자색 변환 애니메이션 */
 }
 
 .navbar:hover {
@@ -56,7 +59,7 @@ const logOut = () => {
 
 .navbar .nav-link,
 .navbar .navbar-brand {
-  color: white; /* 기본 글자색 흰색 */
+  color: rgb(255, 255, 255); /* 기본 글자색 흰색 */
   transition: color 0.3s ease; /* 글자색 변환 애니메이션 */
 }
 
@@ -69,6 +72,17 @@ const logOut = () => {
   border: none;
   background: none;
   cursor: pointer;
+}
+.footerstyle {
+border-top: 1px solid rgb(229, 229, 229);
+margin-top: 3rem;
+padding: 3rem;
+background-color: rgb(246, 246, 246);
+text-align: center;
+bottom: 0%
+}
+.navbarbottom {
+  border-bottom: 1px solid rgb(219, 219, 219);
 }
 </style>
 

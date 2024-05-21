@@ -1,43 +1,16 @@
 <template>
-  <div>
-    <img class="img" src="/assets/map_bg.png" alt="...">
-  </div>
-  <div style="background-color : #F6F1FF">
-    <!-- <img class="img" src="/assets/grand.png" alt="..."> -->
-    <div class="all">
-    <h1 class="p-5 fw-bold" style="color : #702828">나에게 맞는 상품 추천</h1>
-    <div>
-      <div id="carouselExampleIndicators" class="carousel slide">
-        <div class="carousel-indicators">
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-        </div>
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img src="/assets/sample1.png" class="d-block w-80 mx-auto" alt="...">
-          </div>
-          <div class="carousel-item">
-            <img src="/assets/sample1.png" class="d-block w-80 mx-auto" alt="...">
-          </div>
-          <div class="carousel-item">
-            <img src="/assets/sample1.png" class="d-block w-80 mx-auto" alt="...">
-          </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-      </div>
-    </div>
-  </div>
-  <footer class="footerstyle">
-    <p>somethingsomethingsomethingsomethingsomethingsomethingsomethingsomething</p>
-  </footer>
+<div>
+ <!-- <div>
+  saving your money
+  예적금의 시작
+ </div>
+ <div>
+  금상추와 함께
+  쉽고 빠르게,
+ </div>
+ <div>
+  예적금 추천 리스트
+ </div> -->
 </div>
 </template>
 
@@ -46,21 +19,17 @@
 </script>
 
 <style scoped>
-.footerstyle {
-padding: 3rem;
-background-color: rgb(146, 157, 177);
-text-align: center;
-}
+
 
 .all {
-  margin: 10rem;
-  margin-top: 0;
+  margin: 2rem 15rem;
+  /* margin-top: 0; */
 }
 
-.img {
+/* .img {
   position:relative;
-  width: 90%;
+  width: 100%;
   height: 20rem;
   margin-left: 5%;
-}
+} */
 </style>

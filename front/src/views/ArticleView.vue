@@ -1,19 +1,24 @@
+
 <template>
-  <div class="img">
-    <h1>게시판</h1>
-    <RouterLink :to="{ name: 'CreateView' }">
-      글쓰기
-    </RouterLink>
-    <thead>
-      <tr class="category">
-        <th width="250px" class="">작성자</th>
-        <th width="668px" class="">제목</th>
-        <th width="202px" class="">날짜</th>
-      </tr>
-    </thead>
-    <ArticleList />
-    <input class="search-input" type="text" placeholder="작성자, 제목을 입력하세요">
+  <div>
+   
+    <!-- <img class="bg w-100 article-bg" src="/assets/exchange_bg.png" alt="..."> -->
+    <h1 class="sample-text">게시판</h1>
   </div>
+  
+    <div class="article-container">
+      <div class="article-table cate">
+        <h5 class="title-cate">제목</h5>
+        <h5 class="username-cate">작성자</h5>
+        <h5 class="dates-cate">날짜</h5>
+      </div>
+        
+      <ArticleList />
+      <input class="search-input" type="text" placeholder="작성자, 제목을 입력하세요">
+      <RouterLink :to="{ name: 'CreateView' }" class="create-link">
+        글쓰기
+      </RouterLink>
+    </div>
 </template>
 
 <script setup>
@@ -27,26 +32,102 @@ const store = useCounterStore()
 onMounted(() => {
   store.getArticles()
 })
-
 </script>
 
-<style>
-.img {
-  position:relative;
-  width: 80%;
-  height: 20rem;
-  margin-left: 10%;
-}
-.background {
-    background-color: #F6F1FF;
-}
+<style scoped>
 .search-input {
   display: block;
-  padding: 4px 8px;
-  margin: 10px auto;
-  width: 320px;
+  padding: 8px 12px;
+  margin: 20px auto;
+  width: 80%;
+  max-width: 600px;
   font-size: 16px;
   outline: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
+.article-bg {
+  height: 20rem;
+  opacity: 0.7;
+}
+
+.overlay {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-weight: 800;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.article-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  padding:0;
+  width: 65%;
+}
+
+.article-table {
+  width: 100%;
+  display:flex;
+  border-collapse: collapse;
+
+}
+
+.title-cate {
+  width: 60%;
+}
+
+.username-cate {
+  width: 20%;
+}
+
+.date-cate {
+  width: 20%;
+}
+
+.cate {
+  border-bottom: 2px solid rgb(166, 166, 166);
+}
+
+.cate th {
+  padding: 12px 8px;
+  text-align: left;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.article-table th, .article-table td {
+  padding: 12px 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+.sample-text {
+  padding: 7rem 0;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bolder;
+}
+
+.create-link {
+  display: block;
+  text-align: center;
+  padding: 10px 20px;
+  margin: 20px auto;
+  width: 150px;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.create-link:hover {
+  background-color: #0056b3;
+}
 </style>

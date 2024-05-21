@@ -1,47 +1,59 @@
 <template>
+  <div>
     <img class="bg" src="/assets/map_bg.png" alt="...">
-
+    <h1 class="overlay">주변 은행 찾기</h1>
+  </div>
     <div class="bank-container">
-      <h1>카카오 지도 예제</h1>
-      <form id="filter-form" @submit.prevent="searchBank">
-        <a>지역선택 </a>
-        <select v-model="selectedCity" @change="updateDistricts">
-          <option value="">:: 시/도 ::</option>
-          <option v-for="city in cities" :key="city" :value="city">{{ city }}</option>
-        </select>
-        &nbsp;
-        <!-- <label for="district">지역2:</label> -->
-        <select v-model="selectedDistrict">
-          <option value="">:: 시/군/구 ::</option>
-          <option v-for="district in districts" :key="district"  :value="district">{{ district }}</option>
-          <!-- 다른 지역 추가 -->
-        </select>
-        &nbsp;
-        <label for="name">은행:</label>
-        <select v-model="name" id="name">
-            <option value="">-----</option>
-            <option value="경남은행">경남은행</option>
-            <option value="광주은행">광주은행</option>
-            <option value="국민은행">국민은행</option>
-            <option value="기업은행">기업은행</option>
-            <option value="대구은행">대구은행</option>
-            <option value="농협은행">농협은행</option>
-            <option value="부산은행">부산은행</option>
-            <option value="산업은행">산업은행</option>
-            <option value="수협은행">수협은행</option>
-            <option value="신한은행">신한은행</option>
-            <option value="우리은행">우리은행</option>
-            <option value="제주은행">제주은행</option>
-            <option value="제일은행">제일은행</option>
-            <option value="전북은행">전북은행</option>
-            <option value="하나은행">하나은행</option>
-            <option value="한국씨티은행">한국씨티은행</option>
+      <div class="form-container">
 
-          <!-- 다른 은행 추가 -->
-        </select>
-        &nbsp;
-        <button type="submit">검색</button>
-      </form>
+
+        <div class="card" style="width: 18rem;">
+          <div class="card-body" id="filter-form" @submit.prevent="searchBank">
+            <h6 class="card-title">지역선택
+              <select v-model="selectedCity" @change="updateDistricts">
+              <option value="">:: 시/도 ::</option>
+              <option v-for="city in cities" :key="city" :value="city">{{ city }}</option>
+              </select>
+            </h6>
+
+            <h6 class="card-title">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <select v-model="selectedDistrict">
+                <option value="">:: 시/군/구 ::</option>
+                <option v-for="district in districts" :key="district"  :value="district">{{ district }}</option>
+   
+            </select>
+            </h6>
+
+            <h6 class="card-title"> 은행&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <select v-model="name" id="name">
+                <option value="">-----</option>
+                <option value="경남은행">경남은행</option>
+                <option value="광주은행">광주은행</option>
+                <option value="국민은행">국민은행</option>
+                <option value="기업은행">기업은행</option>
+                <option value="대구은행">대구은행</option>
+                <option value="농협은행">농협은행</option>
+                <option value="부산은행">부산은행</option>
+                <option value="산업은행">산업은행</option>
+                <option value="수협은행">수협은행</option>
+                <option value="신한은행">신한은행</option>
+                <option value="우리은행">우리은행</option>
+                <option value="제주은행">제주은행</option>
+                <option value="제일은행">제일은행</option>
+                <option value="전북은행">전북은행</option>
+                <option value="하나은행">하나은행</option>
+                <option value="한국씨티은행">한국씨티은행</option>
+
+
+              </select>
+            </h6>
+            <button class="btn w-100"  type="submit">검색</button>
+          </div>
+        </div>
+
+
+        
+    </div>
       <br>
       <div id="map" class="map"></div>
     </div>
@@ -264,25 +276,91 @@
   };
   </script>
   
-  <style scoped>
+  <!-- <style scoped>
+  .select {
+    border: 1px solid black;
+    width: 350px;
+  }
+
   .map {
-    width: 80%;
+    display: flex;
+    width: 70%;
     height: 800px;
     margin: 0 auto;
     border: 1px solid #702828;
+    right: 10%;
   }
 
   .bank-container {
+    /* display: flex; */
     text-align: center;
     padding: 0 auto;
+  }
+  .bg {
+    width: 100%;
+    /* left: 50%; */
+    height: 20rem;
+    opacity: 0.7;
+  }
+  .overlay {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: black;
+  font-weight: 500; /* 필요에 따라 텍스트 색상을 조절 */
+  font-size: 2rem; /* 필요에 따라 텍스트 크기를 조절 */
+  text-align: center;
+  }
+  .container {
+  /* position: relative; 이거 때문에 img가 줄어드는데 */
+  width: 100%;
+  }
+  </style>
+  <style>
+  .font {
+    font-family: 'NPSfont_regular';
+  }
+  </style> -->
+  <style scoped>
+  .bank-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+  }
+  .form-container {
+    margin-right: 20px;
+  }
+  .select {
+    border: 1px solid black;
+    width: 300px;
+  }
+  .map {
+    flex-grow: 1;
+    height: 600px;
+    border: 1px solid gray;
+    border-radius: 10px;
   }
   .bg {
     width: 100%;
     height: 20rem;
     opacity: 0.7;
   }
-  </style>
-  <style>
+  .overlay {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-weight: 500;
+    font-size: 2rem;
+    text-align: center;
+  }
+  .container {
+    position: relative;
+    width: 100%;
+  }
   .font {
     font-family: 'NPSfont_regular';
   }

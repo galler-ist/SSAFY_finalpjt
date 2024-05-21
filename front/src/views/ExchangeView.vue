@@ -1,12 +1,14 @@
 <template>
+  <div>
+    <img class="bg w-100 excahnge-bg" src="/assets/exchange_bg.png" alt="...">
+    <h1 class="overlay">환율 계산기</h1>
+  </div>
+  <div class="all">
     <div>
-      <h1>환율 계산기</h1>
-      <h2>한화 -> 타국</h2>
       <form @submit.prevent="calculate">
         <div>
-          <label for="amount">원화 입력:</label>
-          <input type="number" v-model="amount" id="amount" required />
-          <span>KRW</span>
+          <label class="krw-container" for="amount">원화 입력</label>
+          <input class="county-money" type="number" v-model="amount" id="amount" required />
         </div>
         <div>
           <label for="toCurrency">타국 통화:</label>
@@ -20,7 +22,7 @@
       <div v-if="result !== null">
         <h2>결과: {{ amount }} KRW = {{ result }} {{  toCurrency }}</h2>
       </div>
-      
+    </div>
       <hr>
       <form @submit.prevent="calculateReverse">
         <h2>타국 -> 한화</h2>
@@ -134,6 +136,35 @@
   .exchange100 {
     color: gray;
     
+  }
+  .excahnge-bg {
+    height: 20rem;
+    opacity: 0.7;
+  }
+  .overlay {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: black;
+    font-weight: 500;
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  .all {
+    margin: 2rem 15rem;
+  }
+  .krw-container {
+    display: flex;
+    width: auto;
+    border: 1px solid gray;
+    border-radius: 10px 0px 0px 10px;
+  }
+  .county-money {
+    display: flex;
+    border: 1px solid gray;
+    border-radius: 0px 10px 10px 0px;
   }
   </style>
   

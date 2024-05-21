@@ -1,42 +1,50 @@
 <template>
-  <div class="img">
-    <div v-if="article">
-      <h2>{{ article.title }}</h2>
-      <p>{{ article.username }}</p>
-      <p>{{ article.created_at.substring(0, 10) }}</p>
+  <div class="row">
+    <div class="col-12 article-container">
+      <div class="article-table">
+        <h1 class="sample-text"></h1>
+        <RouterLink class="link" :to="{ name: 'ArticleView' }">자유게시판</RouterLink>
+        <div v-if="article">
+        <h2>{{ article.title }}</h2>
+        <p>{{ article.username }}</p>
+        <p>{{ article.created_at.substring(0, 10) }}</p>
+        <hr>
+        <p>{{ article.content }}</p>
+        <!-- <p>{{ article.like }}</p> -->
+        <!-- <button class="btn" @click="toggleLike">
+          {{ article.like ? 'Unlike' : 'Like' }}
+        </button> -->
+        
+      </div>
       <hr>
-      <p>{{ article.content }}</p>
-      <p>{{ article.like }}</p>
-      <!-- <button class="btn" @click="toggleLike">
-        {{ article.like ? 'Unlike' : 'Like' }}
-      </button> -->
+      <div>
+        <div v-if="comments.length">
+          <ul v-for="comment in comments" :key="comment.id">
 
-    </div>
-    <button class="btn"><RouterLink :to="{ name: 'ArticleView' }">목록</RouterLink></button>
-    <button class="btn" v-if="isOwner" @click="goToUpdateView">Update Article</button>
-    <button class="btn" v-if="isOwner" @click="deleteArticle">Delete Article</button>
-    <hr>
-    <div v-if="comments.length">
-      <ul>
-        <li v-for="comment in comments" :key="comment.id">
-          <p>{{ comment.content }}</p>
-          <small>by {{ comment.user }}</small>
-          <button class="btn" @click="deleteComment(comment.id)">Delete</button>
-        </li>
-      </ul>
-    </div>
-    <div v-else>
-      <p>No comments yet.</p>
-    </div>
+            <small>{{ comment.user }}</small>
+            <p>{{ comment.content }}</p>
+            <button class="btn btn-delete" @click="deleteComment(comment.id)">Delete</button>
+            <hr>
 
-    <form @submit.prevent="addComment">
-      <textarea class="comment" v-model="newComment" placeholder="Write a comment..."></textarea>
-      <br>
-      <button class="btn" type="submit">Submit</button>
-    </form>
-    
+          </ul>
+        </div>
+        <div v-else>
+          <p>No comments yet.</p>
+        </div>
+        <div>
+          <form  class="comment-container" @submit.prevent="addComment">
+            <textarea class="comment" v-model="newComment" placeholder="Write a comment..."></textarea>
+            <button class="btn-comment" style="background-color: #ffffff" type="submit">Submit</button>
+          </form>
+        </div>
+      </div>
+      <button class="btn" style="background-color: #ffffff" v-if="isOwner" @click="goToUpdateView">Update Article</button>
+      <button class="btn" v-if="isOwner" @click="deleteArticle">Delete Article</button>
+    </div>
   </div>
-</template>
+  </div>
+  
+  </template>
 
 <script setup>
 import axios from 'axios'
@@ -164,6 +172,44 @@ const goToUpdateView = () => {
   margin-left: 20%;
 }
 .comment {
-  width: 60%;
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px 0px 0px 8px;
 }
+.sample-text {
+  padding: 5rem 0;
+  text-align: center;
+  font-size: 2rem;
+}
+.article-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2rem auto;
+  width: 90%;
+}
+.article-table {
+  width: 65%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+.link {
+  font-size: 10px;
+  text-decoration: none;
+}
+.comment-container {
+  display: flex;
+  border: 1px solid gray;
+  border-radius: 10px ;
+
+}
+.btn-comment {
+justify-content: right;
+border: 1px;
+border-radius: 0px 8px 8px 0px;
+}
+.btn-delete {
+font:50;
+}
+
 </style>
