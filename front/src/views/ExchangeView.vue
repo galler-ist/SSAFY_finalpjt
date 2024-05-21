@@ -50,7 +50,7 @@
         foreignAmount: 0,
         fromCurrency: 'KRW',
         toCurrency: '',
-        currencies: ['USD','JPY','EUR'],
+        currencies: [],
         rates: {},
         result: null,
         reverseResult: null,
@@ -71,8 +71,13 @@
       async fetchRates() {
         try {
           const response = await fetch('http://127.0.0.1:8000/exchange/');
+          console.log('우선 response자체가 받아는 와질까', response)
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`)
+          }
           const data = await response.json();
           this.currencies = data;
+          console.log('this.currencies이자 data야', data)
           this.rates = data.reduce((acc, cur) => {
             acc[cur.cur_unit] = parseFloat(cur.deal_bas_r.replace(/,/g, ''));
             return acc;
@@ -95,14 +100,14 @@
     },
       calculate() {
         if (this.amount <= 0) {
-          alert('한화를 입력하세요');
+          alert('금액을 입력하세요');
           return;
         }
 
         if (this.toCurrency && this.amount > 0) {
           const rate = this.rates[this.toCurrency];
           if (rate) {
-            this.result = (this.amount / rate).toFixed(2);
+            this.result = (this.amount / rate);
           } else {
             alert(`${this.toCurrency}${this.getKoreanPostposition(this.toCurrency)} 찾을 수 없습니다.`);
             this.result = null;
@@ -117,7 +122,7 @@
         if (this.toCurrency && this.foreignAmount > 0) {
             const rate = this.rates[this.toCurrency];
             if (rate) {
-                this.reverseResult = (this.foreignAmount * rate).toFixed(2);
+                this.reverseResult = (this.foreignAmount * rate);
             } else {
                 alert('해당 환율 정보를 찾을 수 없습니다.');
                 this.reverseResult = null;

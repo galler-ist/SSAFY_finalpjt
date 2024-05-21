@@ -7,9 +7,10 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav me-auto font-size">
-          <RouterLink class="nav-link font" :to="{ name: 'ArticleView' }">Articles</RouterLink>
+          <RouterLink class="nav-link" :to="{ name: 'ArticleView' }">Articles</RouterLink>
           <RouterLink class="nav-link" :to="{ name: 'BankView' }">Bank</RouterLink>
           <RouterLink class="nav-link" :to="{ name: 'ExchangeView' }">Exchange</RouterLink>
+          <RouterLink class="nav-link" :to="{ name: 'FinanceView' }">Finance</RouterLink>
         </div>
         <div class="navbar-nav ms-auto">
           <RouterLink class="nav-link" v-if="!isLogin" :to="{ name: 'SignUpView' }">Sign In</RouterLink>
@@ -29,6 +30,7 @@
 import { RouterView, RouterLink } from 'vue-router'
 import { computed } from 'vue'
 import { useCounterStore } from '@/stores/counter.js' 
+import './style/style.css'
 
 const counterStore = useCounterStore()
 const isLogin = computed(() => counterStore.isLogin)
