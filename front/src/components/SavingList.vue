@@ -1,5 +1,5 @@
 <template>
-  <div class="deposit-table">
+  <div class="saving-table">
     <h3>적금 조회</h3>
 
     <label class="bank-select" for="bank-select">은행 선택&nbsp;</label>
@@ -176,7 +176,8 @@ th {
 td {
   text-align: center;
 }
-.deposit-table {
+
+.saving-table {
   width: 65%;
   margin: 0 auto;
 }

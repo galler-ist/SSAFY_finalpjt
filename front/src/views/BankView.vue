@@ -168,6 +168,8 @@
       showCurrentLocation() {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(position => {
+          console.log(position,"positionnnnnnn")
+          console.log(position.coords,"position.coordsssssssssss")
           const lat = position.coords.latitude;
           const lng = position.coords.longitude;
           const currentPosition = new kakao.maps.LatLng(lat, lng);
