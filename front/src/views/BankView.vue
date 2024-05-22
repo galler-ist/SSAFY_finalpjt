@@ -1,7 +1,7 @@
 <template>
   <div>
-    <img class="bg" src="/assets/map_bg.png" alt="...">
-    <h1 class="overlay">주변 은행 찾기</h1>
+    <!-- <img class="bg" src="/assets/map_bg.png" alt="..."> -->
+    <h1 class="title-container">주변 은행 찾기</h1>
   </div>
     <div class="bank-container">
       <div class="form-container">
@@ -48,9 +48,9 @@
               </select>
             </h6>
             <button class="btn w-100"  type="submit">검색</button>
+            <button class="btn w-100" @click="showCurrentLocation">현재 나의 위치로 보기</button>
           </form>
         </div>
-        <button @click="showCurrentLocation">현재 나의 위치로 보기</button>
 
 
 
@@ -382,6 +382,7 @@
     height: 600px;
     border: 1px solid gray;
     border-radius: 10px;
+    z-index: -1;
   }
   .bg {
     width: 100%;
@@ -404,5 +405,11 @@
   }
   .font {
     font-family: 'NPSfont_regular';
+  }
+  .title-container {
+    padding: 7rem 0rem 3rem 0rem;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bolder;
   }
   </style>

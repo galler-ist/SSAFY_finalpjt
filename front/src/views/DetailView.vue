@@ -22,8 +22,8 @@
           <ul v-for="comment in comments" :key="comment.id">
 
             <small>{{ comment.user }}</small>
+            <button class="btn btn-delete comment-delete" @click="deleteComment(comment.id)">X</button>
             <p>{{ comment.content }}</p>
-            <button class="btn btn-delete" @click="deleteComment(comment.id)">Delete</button>
             <hr>
 
           </ul>
@@ -204,12 +204,14 @@ const goToUpdateView = () => {
 
 }
 .btn-comment {
-justify-content: right;
+
 border: 1px;
 border-radius: 0px 8px 8px 0px;
 }
 .btn-delete {
 font:50;
 }
-
+.comment-delete {
+  text-align: right;
+}
 </style>

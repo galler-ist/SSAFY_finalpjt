@@ -7,10 +7,10 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav me-auto font-size">
-          <RouterLink class="nav-link" :to="{ name: 'ArticleView' }">Articles</RouterLink>
           <RouterLink class="nav-link" :to="{ name: 'BankView' }">Bank</RouterLink>
           <RouterLink class="nav-link" :to="{ name: 'ExchangeView' }">Exchange</RouterLink>
           <RouterLink class="nav-link" :to="{ name: 'DepositList' }">Finance</RouterLink>
+          <RouterLink class="nav-link" :to="{ name: 'ArticleView' }">Articles</RouterLink>
         </div>
         <div class="navbar-nav ms-auto">
           <RouterLink class="nav-link" v-if="!isLogin" :to="{ name: 'SignUpView' }">Sign In</RouterLink>

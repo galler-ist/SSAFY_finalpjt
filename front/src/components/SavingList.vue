@@ -1,14 +1,14 @@
 <template>
-  <div>
-    <h1>적금 금리 비교</h1>
+  <div class="saving-table">
+    <h3>적금 조회</h3>
 
-    <label for="bank-select">은행 선택:</label>
+    <label class="bank-select" for="bank-select">은행 선택:</label>
     <select id="bank-select" v-model="selectedBank">
       <option value="">모든 은행</option>
       <option v-for="bank in uniqueBanks" :key="bank" :value="bank">{{ bank }}</option>
     </select>
 
-    <table class="saving-table">
+    <table class="table-container">
       <thead>
         <tr>
           <th>상품명</th>
@@ -176,7 +176,16 @@ th {
 td {
   text-align: center;
 }
+
 .saving-table {
-  margin: 10px 20px;
+  width: 65%;
+  margin: 0 auto;
+}
+.table-container {
+  width: 100%;
+  border-collapse: collapse;
+}
+.bank-select {
+  padding: 1rem 0rem;
 }
 </style>

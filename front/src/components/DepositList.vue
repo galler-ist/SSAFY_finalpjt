@@ -1,27 +1,14 @@
 <template>
-  <div>
-    <!-- <div v-for="deposit in deposits" :key="deposit.base.deposit_code">
-      <h2>{{ deposit.base.name }}</h2>
-      <p>은행: {{ deposit.base.kor_co_nm }}</p>
-      <p>생성일: {{ deposit.base.dcls_month }}</p>
-      <p>가입 방법: {{ deposit.base.join_way }}</p>
-      <p>우대 조건: {{ deposit.base.spcl_cnd }}</p>
-      <ul>
-        <li v-for="option in deposit.options" :key="option.id">
-          {{ option.intr_rate_type_nm }} - {{ option.save_trm }}개월 - {{ option.intr_rate }}% | {{ option.intr_rate2 }}%
-        </li>
-      </ul>
-    </div> -->
+  <div class="deposit-table">
+    <h3>예금 조회</h3>
 
-    <h1>예금 금리 비교</h1>
-
-    <label for="bank-select">은행 선택:</label>
+    <label class="bank-select" for="bank-select">은행 선택:</label>
     <select id="bank-select" v-model="selectedBank">
       <option value="">모든 은행</option>
       <option v-for="bank in uniqueBanks" :key="bank" :value="bank">{{ bank }}</option>
     </select>
 
-    <table class="deposit-table">
+    <table class="table-container">
       <thead>
         <tr>
           <th>상품명</th>
@@ -191,6 +178,15 @@ td {
 }
 
 .deposit-table {
-  margin:10px 20px;
+  width: 65%;
+  margin: 0 auto;
+  
+}
+.table-container {
+  width: 100%;
+  border-collapse: collapse;
+}
+.bank-select {
+  padding: 1rem 0rem;
 }
 </style>

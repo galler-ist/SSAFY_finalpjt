@@ -1,7 +1,7 @@
 <template>
   <div>
-    <img class="bg w-100 excahnge-bg" src="/assets/exchange_bg.png" alt="...">
-    <h1 class="overlay">환율 계산기</h1>
+    <!-- <img class="bg w-100 excahnge-bg" src="/assets/exchange_bg.png" alt="..."> -->
+    <h1 class="title-container">환율 계산기</h1>
   </div>
   <div class="all">
     <div>
@@ -147,7 +147,7 @@
     opacity: 0.7;
   }
   .overlay {
-    position: absolute;
+    /* position: absolute; */
     top: 20%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -162,14 +162,21 @@
   }
   .krw-container {
     display: flex;
-    width: auto;
+    width: 5rem;
     border: 1px solid gray;
-    border-radius: 10px 0px 0px 10px;
+    border-radius: 5px 0px 0px 5px;
   }
   .county-money {
     display: flex;
+    flex-wrap: nowrap;
     border: 1px solid gray;
-    border-radius: 0px 10px 10px 0px;
+    border-radius: 0px 5px 5px 0px;
+  }
+  .title-container {
+    padding: 7rem 0rem 3rem 0rem;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bolder;
   }
   </style>
   
