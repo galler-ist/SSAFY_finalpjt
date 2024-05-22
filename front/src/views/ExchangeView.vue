@@ -70,7 +70,12 @@
     methods: {
       async fetchRates() {
         try {
-          const response = await fetch('http://127.0.0.1:8000/exchange/');
+          const response = await fetch('http://127.0.0.1:8000/exchange/', {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          });
           console.log('우선 response자체가 받아는 와질까', response)
           if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`)
