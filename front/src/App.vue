@@ -1,7 +1,7 @@
 <template>
-  <nav class="navbar navbarbottom navbar-expand-lg bg-body-lg custom-navbar font">
+  <nav class="navbar navbar-expand-lg bg-body-lg custom-navbar font">
     <div class="container-fluid">
-      <RouterLink class="navbar-brand" style="color: yellow" :to="{ name: 'HomeView' }">GeumSangChu</RouterLink>
+      <RouterLink class="navbar-brand" style="color: black" :to="{ name: 'HomeView' }">GSC</RouterLink>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -22,7 +22,26 @@
   </nav>
   <RouterView />
   <footer class="footerstyle">
-    <p>somethingsomethingsomethingsomethingsomethingsomethingsomethingsomething</p>
+    <div class="foot">
+      <div class="seung">
+        <p>Back developer</p>
+        <small>name&nbsp;&nbsp;: Baek seungwoo</small>
+        <small>e-mail&nbsp;: swghj@naver.com</small>
+      </div>
+      <div class="nong">
+        <p>Front developer</p>
+        <small>name&nbsp;&nbsp;: Kim geunwook</small>
+        <small>e-mail&nbsp;: nonggeun0827@naver.com</small>
+      </div>
+      <div class="icons">
+        <a href="https://www.instagram.com/hellossafy/">
+          <img class="insta-icon" src="/assets/instagram_icon.png" alt="...">
+        </a>
+        <a href="https://github.com/galler-ist/SSAFY_finalpjt">
+          <img class="github-icon" src="/assets/github2_icon.png" alt="...">
+        </a>
+      </div>
+    </div>
   </footer>
 </template>
 
@@ -49,14 +68,16 @@ const logOut = () => {
   position: fixed;
   top: 0;
   left: 0;
-  background-color: rgb(75, 75, 75);/* 기본 상태에서 투명 */
+  background-color: rgb(75, 75, 75, 0);/* 기본 상태에서 투명 */
   z-index: 1; /* 다른 요소들 위에 표시 */
+
   transition: background-color 0.5s ease, color 0.5s ease; /* 배경색과 글자색 변환 애니메이션 */
 }
 
 .navbar:hover {
   width: 100%;
-  background-color: white; /* 마우스 올렸을 때 흰색 */
+  background-color: rgba(234, 234, 234, 0.3); /* 마우스 올렸을 때 흰색 */
+
 }
 
 .navbar .nav-link,
@@ -83,13 +104,47 @@ background-color: rgb(246, 246, 246);
 text-align: center;
 bottom: 0%
 }
-.navbarbottom {
-  border-bottom: 1px solid rgb(219, 219, 219);
+.insta-icon {
+  width: 30px;
+  height: 30px;
+  margin-top: 10px;
+}
+.github-icon {
+  width: 30px;
+  height: 30px;
+  margin-top: 10px;
+}
+.foot {
+  color: gray;
+  display: flex;
+  flex-direction: row;
+  width: 65%;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  padding: 0;
+}
+.icons {
+  display: flex;
+  flex-direction: column;
+  width: 10%;
+}
+.seung {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+.nong {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
 }
 </style>
 
 <style>
-.font {
-  font-family: 'NPSfont_regular';
+* {
+  font-family: 'NPSfont_regula';
 }
 </style>

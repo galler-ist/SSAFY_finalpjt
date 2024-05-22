@@ -1,11 +1,12 @@
 
-<template>
+<template >
+
   <div>
    
     <!-- <img class="bg w-100 article-bg" src="/assets/exchange_bg.png" alt="..."> -->
     <h1 class="sample-text">게시판</h1>
   </div>
-  
+  <div>
     <div class="article-container">
       <div class="article-table cate">
         <h5 class="title-cate">제목</h5>
@@ -19,6 +20,8 @@
         글쓰기
       </RouterLink>
     </div>
+  </div>
+
 </template>
 
 <script setup>

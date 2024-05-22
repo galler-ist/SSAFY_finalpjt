@@ -2,7 +2,7 @@
   <div class="deposit-table">
     <h3>적금 조회</h3>
 
-    <label class="bank-select" for="bank-select">은행 선택:</label>
+    <label class="bank-select" for="bank-select">은행 선택&nbsp;</label>
     <select id="bank-select" v-model="selectedBank">
       <option value="">모든 은행</option>
       <option v-for="bank in uniqueBanks" :key="bank" :value="bank">{{ bank }}</option>

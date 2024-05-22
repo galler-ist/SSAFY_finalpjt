@@ -2,7 +2,7 @@
   <div class="deposit-table">
     <h3>예금 조회</h3>
 
-    <label class="bank-select" for="bank-select">은행 선택:</label>
+    <label class="bank-select" for="bank-select">은행 선택&nbsp;</label>
     <select id="bank-select" v-model="selectedBank">
       <option value="">모든 은행</option>
       <option v-for="bank in uniqueBanks" :key="bank" :value="bank">{{ bank }}</option>
@@ -53,17 +53,18 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="comparison in filteredDeposits" :key="comparison.name + comparison.bank_name + comparison.interest_rate_type">
-          <td>{{ comparison.name }}</td>
-          <td>{{ comparison.bank_name }}</td>
-          <td>{{ comparison.interest_rate_type }}</td>
-          <td>{{ comparison['1개월'] || '-' }}</td>
-          <td>{{ comparison['3개월'] || '-' }}</td>
-          <td>{{ comparison['6개월'] || '-' }}</td>
-          <td>{{ comparison['12개월'] || '-' }}</td>
-          <td>{{ comparison['24개월'] || '-' }}</td>
-          <td>{{ comparison['36개월'] || '-' }}</td>
-        </tr>
+          <tr v-for="comparison in filteredDeposits" :key="comparison.name + comparison.bank_name + comparison.interest_rate_type">
+            <td>{{ comparison.name }}</td>
+            <td>{{ comparison.bank_name }}</td>
+            <td>{{ comparison.interest_rate_type }}</td>
+            <td>{{ comparison['1개월'] || '-' }}</td>
+            <td>{{ comparison['3개월'] || '-' }}</td>
+            <td>{{ comparison['6개월'] || '-' }}</td>
+            <td>{{ comparison['12개월'] || '-' }}</td>
+            <td>{{ comparison['24개월'] || '-' }}</td>
+            <td>{{ comparison['36개월'] || '-' }}</td>
+          </tr>
+
       </tbody>
     </table>
   </div>

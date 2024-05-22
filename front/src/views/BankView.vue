@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <!-- <img class="bg" src="/assets/map_bg.png" alt="..."> -->
+  <div class="image-container bg-image">
+    <img class="w-100 exchange-bg" src="/assets/map6_bg.png" alt="...">
     <h1 class="title-container">주변 은행 찾기</h1>
   </div>
     <div class="bank-container">
@@ -314,53 +314,7 @@
     }
   };
   </script>
-  
-  <!-- <style scoped>
-  .select {
-    border: 1px solid black;
-    width: 350px;
-  }
 
-  .map {
-    display: flex;
-    width: 70%;
-    height: 800px;
-    margin: 0 auto;
-    border: 1px solid #702828;
-    right: 10%;
-  }
-
-  .bank-container {
-    /* display: flex; */
-    text-align: center;
-    padding: 0 auto;
-  }
-  .bg {
-    width: 100%;
-    /* left: 50%; */
-    height: 20rem;
-    opacity: 0.7;
-  }
-  .overlay {
-  position: absolute;
-  top: 20%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: black;
-  font-weight: 500; /* 필요에 따라 텍스트 색상을 조절 */
-  font-size: 2rem; /* 필요에 따라 텍스트 크기를 조절 */
-  text-align: center;
-  }
-  .container {
-  /* position: relative; 이거 때문에 img가 줄어드는데 */
-  width: 100%;
-  }
-  </style>
-  <style>
-  .font {
-    font-family: 'NPSfont_regular';
-  }
-  </style> -->
   <style scoped>
   .bank-container {
     display: flex;
@@ -387,7 +341,7 @@
     height: 20rem;
     opacity: 0.7;
   }
-  .overlay {
+  /* .overlay {
     position: absolute;
     top: 20%;
     left: 50%;
@@ -396,7 +350,7 @@
     font-weight: 500;
     font-size: 2rem;
     text-align: center;
-  }
+  } */
   .container {
     position: relative;
     width: 100%;
@@ -404,10 +358,65 @@
   .font {
     font-family: 'NPSfont_regular';
   }
-  .title-container {
+  /* .title-container {
     padding: 7rem 0rem 3rem 0rem;
     text-align: center;
     font-size: 2rem;
     font-weight: bolder;
+  } */
+  /* .image-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+} */
+  /* .title-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -500%);
+  color: white;
+  font-weight: 500;
+  font-size: 2rem;
+  text-align: center;
+  z-index: 1;
+} */
+.title-container {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-weight: 500;
+    font-size: 2rem;
+    text-align: center;
+    z-index: 1;
   }
+  .exchange-bg {
+  width: 100%;
+  height: 18rem;
+  opacity: 0.7;
+}
+
+.image-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+.bg-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+  /* or use -webkit-mask-image for better compatibility with some browsers */
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+}
+
   </style>
