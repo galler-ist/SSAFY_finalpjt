@@ -176,7 +176,7 @@ th {
 td {
   text-align: center;
 }
-.deposit-table {
+.saving-table {
   margin: 10px 20px;
 }
 </style>

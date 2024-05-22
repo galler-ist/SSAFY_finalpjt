@@ -8,7 +8,7 @@
 
 
         <div class="card" style="width: 18rem;">
-          <div class="card-body" id="filter-form" @submit.prevent="searchBank">
+          <form class="card-body" id="filter-form" @submit.prevent="searchBank">
             <h6 class="card-title">지역선택
               <select v-model="selectedCity" @change="updateDistricts">
               <option value="">:: 시/도 ::</option>
@@ -48,7 +48,7 @@
               </select>
             </h6>
             <button class="btn w-100"  type="submit">검색</button>
-          </div>
+          </form>
         </div>
         <button @click="showCurrentLocation">현재 나의 위치로 보기</button>
 
@@ -168,6 +168,8 @@
       showCurrentLocation() {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(position => {
+          console.log(position,"positionnnnnnn")
+          console.log(position.coords,"position.coordsssssssssss")
           const lat = position.coords.latitude;
           const lng = position.coords.longitude;
           const currentPosition = new kakao.maps.LatLng(lat, lng);
