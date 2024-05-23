@@ -1,6 +1,6 @@
 <template>
     <div>
-      <h2>{{ isEditMode ? 'Edit' : 'Create' }} Portfolio</h2>
+      <h2>Edit Portfolio</h2>
       <form @submit.prevent="savePortfolio">
         <div>
             <label for="birth">Birth :</label>
@@ -25,13 +25,18 @@
             <label for="income">Income:</label>
             <input type="number" v-model="portfolio.income" step="0.01" />
         </div>
-        <!-- <div>
-            <label for="savings">Savings:</label>
-            <div v-for="option in savingsOptions" :key="option.id">
-            <input type="checkbox" :value="option.id" v-model="portfolio.savings" />
-            <label>{{ option.name }}</label>
-            </div>
-        </div> -->
+        <label for="deposits">Deposits:</label>
+      <div v-for="deposit in availableDeposits" :key="deposit.deposit_code">
+        <input type="checkbox" :value="deposit.deposit_code" @change="updateSelectedDeposits(deposit)">
+        {{ deposit.name }} ({{ deposit.kor_co_nm }})
+      </div>
+
+      <label for="savings">Savings:</label>
+      <div v-for="saving in availableSavings" :key="saving.saving_code">
+        <input type="checkbox" :value="saving.saving_code" @change="updateSelectedSavings(saving)">
+        {{ saving.name }} ({{ saving.kor_co_nm }})
+      </div>
+
         <button type="submit">Save</button>
         </form>
     </div>
@@ -46,33 +51,115 @@ import { useCounterStore } from '@/stores/counter'
 const store = useCounterStore()
 const route = useRoute()
 const router = useRouter()
+
+const savings = ref([]);
+const deposits = ref([]);
+const selectedSavings = ref([]);
+const selectedDeposits = ref([]);
+const birth = ref('');
+const householdSize = ref(1);
+const maritalStatus = ref('single');
+const hasChildren = ref(false);
+const income = ref(0);
+
 const portfolio = ref({
   birth: '',
   household_size: 0,
   marital_status: 'single',
   has_children: false,
   income: 0,
+  deposits: [],
+  savings: []
 })
-const isEditMode = ref(false)
-// const savingsOptions = ref([])
-  
-const fetchPortfolio = async () => {
-    const username = store.username
+const availableDeposits  = ref([]);
+const availableSavings  = ref([]);
+
+const fetchDeposits = async () => {
   try {
-    console.log('store.API_URL 는', store.API_URL)
-    console.log('store.username 는', store.username)
-    console.log('store.token 는', store.token)
-    const response = await axios.get(`${store.API_URL}/portfolio/api/user/${username}/`, {
+    const response = await axios.get(`${store.API_URL}/finance/api/v1/deposits/`);
+    console.log(response.data)
+    availableDeposits.value = response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const fetchSavings = async () => {
+  try {
+    const response = await axios.get(`${store.API_URL}/finance/api/v1/savings/`);
+    availableSavings.value = response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const fetchPortfolio = async () => {
+  if (store.username) {
+    try {
+      const response = await axios.get(`${store.API_URL}/portfolio/api/user/${store.username}/`,  {
       headers: {
         Authorization: `Token ${store.token}`
       }
     })
-    portfolio.value = response.data
-  } catch (error) {
-    console.error(error)
-    isEditMode.value = false
+      portfolio.value = response.data;
+    } catch (error) {
+      console.error(error,'fetchPortfolio 부분입니다.');
+    }
   }
-}
+};
+
+// const fetchFinanceProducts = async () => {
+//   try {
+//     const savingsResponse = await axios.get(`${store.API_URL}/api/savings/`, {
+//       headers: {
+//         Authorization: `Token ${store.token}`
+//       }
+//     });
+//     savings.value = savingsResponse.data;
+
+//     const depositsResponse = await axios.get(`${store.API_URL}/api/deposits/`, {
+//       headers: {
+//         Authorization: `Token ${store.token}`
+//       }
+//     });
+//     deposits.value = depositsResponse.data;
+
+//     if (route.params.id) {
+//       isEditMode.value = true;
+//       const response = await axios.get(`${store.API_URL}/portfolio/api/user/${route.params.id}/`, {
+//         headers: {
+//           Authorization: `Token ${store.token}`
+//         }
+//       });
+//       const data = response.data;
+//       birth.value = data.birth;
+//       householdSize.value = data.household_size;
+//       maritalStatus.value = data.marital_status;
+//       hasChildren.value = data.has_children;
+//       income.value = data.income;
+//       selectedSavings.value = data.savings.map(saving => saving.saving_code);
+//       selectedDeposits.value = data.deposits.map(deposit => deposit.deposit_code);
+//       portfolio.value = data;
+//     }
+//   } catch (error) {
+//     console.error('Error fetching finance products:', error);
+//   }
+// };
+
+// const fetchPortfolio = async () => {
+//     const username = store.username
+//   try {
+//     const response = await axios.get(`${store.API_URL}/portfolio/api/user/${username}/`, {
+//       headers: {
+//         Authorization: `Token ${store.token}`
+//       }
+//     })
+//     portfolio.value = response.data
+//   } catch (error) {
+//     console.error(error)
+//     isEditMode.value = false
+//   }
+// }
 
 // const fetchSavingsOptions = async () => {
 //   try {
@@ -106,42 +193,95 @@ const toggleChildren = () => {
   }
 }
 
-onMounted( () => {
-  const { id } = route.params
-  if (id) {
-    isEditMode.value = true
-    fetchPortfolio(id)
+const updateSelectedDeposits = (deposit) => {
+  const index = portfolio.value.deposits.findIndex(d => d.deposit_code === deposit.deposit_code);
+  if (index === -1) {
+    portfolio.value.deposits.push(deposit);
+  } else {
+    portfolio.value.deposits.splice(index, 1);
   }
-})
+};
+
+const updateSelectedSavings = (saving) => {
+  const index = portfolio.value.savings.findIndex(s => s.saving_code === saving.saving_code);
+  if (index === -1) {
+    portfolio.value.savings.push(saving);
+  } else {
+    portfolio.value.savings.splice(index, 1);
+  }
+};
+
+
+
+onMounted(() => {
+  fetchDeposits();
+  fetchSavings();
+  fetchPortfolio();
+});
 
 const savePortfolio = async () => {
-  const { id } = route.params
+  console.log(store.username,'store.username===route.params.id')
+  console.log(store.user_id)
   try {
-    if (isEditMode.value) {
-      await axios.put(`${store.API_URL}/portfolio/api/user/${id}/`, portfolio.value, {
+    const data = {
+      birth: portfolio.value.birth,
+      household_size: portfolio.value.household_size,
+      marital_status: portfolio.value.marital_status,
+      has_children: portfolio.value.has_children,
+      income: portfolio.value.income,
+      deposits: portfolio.value.deposits.map(deposit => ({
+        deposit_code: deposit.deposit_code,
+        kor_co_nm: deposit.kor_co_nm,
+        name: deposit.name
+      })),
+      savings: portfolio.value.savings.map(saving => ({
+        saving_code: saving.saving_code,
+        kor_co_nm: saving.kor_co_nm,
+        name: saving.name
+      }))
+    };
+    console.log(data,'dataaaaa')
+    if (route.params.id) {
+      await axios.put(`${store.API_URL}/portfolio/api/user/${store.username}/`, data, {
         headers: {
           Authorization: `Token ${store.token}`
         }
-      })
+      });
     } else {
-      await axios.post(`${store.API_URL}/portfolio/api/portfolios/`, portfolio.value, {
+      await axios.post(`${store.API_URL}/portfolio/api/user/`, data, {
         headers: {
           Authorization: `Token ${store.token}`
         }
-      })
+      });
     }
-    router.push({ name: 'PortfolioList' })
+    router.push({ name: 'PortfolioList' });
   } catch (error) {
-    console.error('Error saving portfolio:',error)
+    console.error('Error saving portfolio:', error.response ? error.response.data : error);
   }
-}
+};
 
 
 
-
-
+// finance쪽 URL은 finance / api / v1 / > router.urls (deposits, savings)
+// <div>
+//   <label for="savings">Savings</label>
+//   <select v-model="portfolio.savings" multiple>
+//     <option v-for="saving in savings" :key="saving.saving_code" :value="saving">
+//       {{ saving.kor_co_nm }} - {{ saving.name }}
+//     </option>
+//   </select>   
+// </div>
+// <div>
+//   <label for="deposits">Deposits</label>
+//   <select v-model="portfolio.deposits" multiple>
+//     <option v-for="deposit in deposits" :key="deposit.deposit_code" :value="deposit">
+//       {{ deposit.kor_co_nm }} - {{ deposit.name }}
+//     </option>
+//   </select>
+// </div>
 </script>
 
 <style scoped>
 /* 스타일을 여기에 작성 */
 </style>
+

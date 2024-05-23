@@ -1,13 +1,11 @@
 from django.shortcuts import render
 from rest_framework import viewsets, status, generics
 from rest_framework.response import Response
-from django.contrib.auth import get_user_model
 from .models import Portfolio, SavingOption
 from .serializers import PortfolioSerializer, SavingOptionSerializer
 from rest_framework.exceptions import NotFound
 from rest_framework.permissions import IsAuthenticated
-from django.contrib.auth.models import User
-
+from accounts.models import CustomUser
 # Create your views here.
 
 # class PortfolioViewSet(viewsets.ModelViewSet):
@@ -27,15 +25,10 @@ from django.contrib.auth.models import User
     #     except (TypeError, KeyError):
     #         return {}
 
-User = get_user_model()
 
 class PortfolioViewSet(viewsets.ModelViewSet):
     queryset = Portfolio.objects.all()
     serializer_class = PortfolioSerializer
-    permission_classes = [IsAuthenticated]
-    
-    def perform_create(self, serializer):
-        serializer.save(user = self.request.user )
 
 # class PortfolioCreateView(generics.CreateAPIView):
 #     queryset = Portfolio.objects.all()
@@ -50,19 +43,21 @@ class PortfolioByUsernameView(generics.RetrieveUpdateAPIView):
     permission_classes = [IsAuthenticated]
 
     def get_object(self):
-        username = self.kwargs['username']
+        user = self.request.user
         try:
-            user = User.objects.get(username=username)
-        except User.DoesNotExist:
-            raise NotFound("User not found")
-
-        try:
-            return Portfolio.objects.get(user=user)
+            portfolio = Portfolio.objects.get(user=user)
         except Portfolio.DoesNotExist:
             raise NotFound("Portfolio not found")
+
+        return portfolio
 
 
 
 class SavingOptionViewSet(viewsets.ModelViewSet):
     queryset = SavingOption.objects.all()
     serializer_class = SavingOptionSerializer
+    
+    
+class PortFolioSet(viewsets.ModelViewSet):
+    queryset = Portfolio.objects.all()
+    serializer_class = PortfolioSerializer    

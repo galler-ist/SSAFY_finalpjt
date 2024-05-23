@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
 
+from finance.models import Deposit, Saving
 # Create your models here.
 
 class Portfolio(models.Model):
@@ -19,8 +20,8 @@ class Portfolio(models.Model):
         ('saving','적금'),
         ('deposit','예금'),
     ]
-    # savings = models.ManyToManyField('SavingOption')
-    
+    savings = models.ManyToManyField(Saving, blank=True, related_name='savings')
+    deposits = models.ManyToManyField(Deposit, blank=True, related_name='deposits')
     def __str__(self):
         return self.user.username
     

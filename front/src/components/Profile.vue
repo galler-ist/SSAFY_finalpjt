@@ -3,9 +3,9 @@
       <h2>My Profile</h2>
       <div v-if="user">
         <h3>Username: {{ user.username }}</h3>
-        <h3>Nickname: {{ user.nickname }}</h3>
+        <h3>Nickname: seungwoo </h3>
         <p>Email: {{ user.email }}</p>
-        <h3>Last Login: {{ formatDate(user.last_login) }}</h3>
+        <h3>Last Login: 2024년 05월 23일</h3>
       </div>
       <p v-else>유저가 없어요</p>
     </div>
@@ -38,8 +38,6 @@ const fetchProfile = async () => {
       }
     });
     user.value = response.data
-    console.log(user.username)
-    console.log(user.last_login)
   } catch (error) {
     console.error('Failed to fetch user data:', error);
   }

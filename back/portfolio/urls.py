@@ -8,6 +8,6 @@ router.register(r'portfolios', PortfolioViewSet)
 
 app_name = 'portfolio'
 urlpatterns = [
-    path('api/', include(router.urls)),
+    path('', include(router.urls)),
     path('api/user/<str:username>/', PortfolioByUsernameView.as_view(), name='portfolio-by-username'),
 ]

@@ -14,7 +14,9 @@ def user_profile(request):
         user = User.objects.get(id=request.user.id)
         data = {
             'username': user.username,
-            'last_login': user.last_login
+            'last_login': user.last_login,
+            'nickname': user.nickname,
+            'email': user.email,
         }
         return JsonResponse(data)
     else:

@@ -5,6 +5,9 @@ from rest_framework.response import Response
 from django.http import HttpResponse
 from .serializers import *
 from .models import *
+from portfolio.serializers import FinanceDepositSerializer, FinanceSavingSerializer
+from rest_framework import viewsets
+from .models import Deposit, Saving
 # Create your views here.
 
 
@@ -121,3 +124,11 @@ def savings(request):
             'options': option_serializer.data
         })
     return Response(result)
+
+class DepositViewSet(viewsets.ModelViewSet):
+    queryset = Deposit.objects.all()
+    serializer_class = DepositSerializer
+
+class SavingViewSet(viewsets.ModelViewSet):
+    queryset = Saving.objects.all()
+    serializer_class = SavingSerializer

@@ -160,42 +160,34 @@
     },
     methods: {
       showCurrentLocation() {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(position => {
-          console.log(position,"positionnnnnnn")
-          const lat = position.coords.latitude;
-          const lng = position.coords.longitude;
-          const currentPosition = new kakao.maps.LatLng(lat, lng);
-          console.log(lat,lng, '현재위치')
-          // 지도 중심을 현재 위치로 이동
-          this.map.setCenter(currentPosition);
-          this.map.setLevel(4);
-          
-          // 기존 마커가 있으면 제거
-          if (this.currentMarker) {
-            this.currentMarker.setMap(null);
-          }
+  // 지정된 좌표
+  const lat = 37.50122767893225;
+  const lng = 127.039658496802;
+  const currentPosition = new kakao.maps.LatLng(lat, lng);
 
-          // 현재 위치에 마커 추가
-          this.currentMarker = new kakao.maps.Marker({
-            position: currentPosition,
-            map: this.map
-          });
+  // 지도 중심을 지정된 위치로 이동
+  this.map.setCenter(currentPosition);
+  this.map.setLevel(4);
 
-          // 인포윈도우 추가
-          const infoWindow = new kakao.maps.InfoWindow({
-            content: '<div style="padding:5px;">당신의 위치입니다</div>',
-            removable: true
-          });
-          infoWindow.open(this.map, this.currentMarker);
-        }, error => {
-          console.error('Error occurred while retrieving location:', error);
-          alert('현재 위치를 가져올 수 없습니다.');
-        });
-      } else {
-        alert('Geolocation을 사용할 수 없습니다.');
-      }
-    },
+  // 기존 마커가 있으면 제거
+  if (this.currentMarker) {
+    this.currentMarker.setMap(null);
+  }
+
+  // 지정된 위치에 마커 추가
+  this.currentMarker = new kakao.maps.Marker({
+    position: currentPosition,
+    map: this.map
+  });
+
+  // 인포윈도우 추가
+  const infoWindow = new kakao.maps.InfoWindow({
+    content: '<div style="padding:5px;">지정된 위치입니다</div>',
+    removable: true
+  });
+  infoWindow.open(this.map, this.currentMarker);
+},
+
 
       updateDistricts() {
         this.districts = this.cityDistricts[this.selectedCity] || [];
