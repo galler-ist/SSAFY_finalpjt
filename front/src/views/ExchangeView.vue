@@ -35,7 +35,7 @@
           </div>
           <p>금액</p>
           <input  class="won-input" type="number" v-model="foreignAmount" id="foreignAmount" required />
-          <h4>결과: {{ foreignAmount }} {{ toCurrency }} = {{ reverseResult }} KRW</h4>
+          <h4>{{ foreignAmount }} {{ toCurrency }} = {{ reverseResult }} KRW</h4>
         </div>
         <div>
           <span>{{ toCurrencySymbol }}</span>
@@ -43,7 +43,7 @@
         </div>
       </div>  
     </form>
-    <p class="exchange100 explain">인도네시아 루피아(IDR), 일본 옌(JPY)은 100단위로 들어감</p>
+    <small class="exchange100 explain">*인도네시아 루피아(IDR), 일본 옌(JPY)은 100단위</small>
 
   </div>
 

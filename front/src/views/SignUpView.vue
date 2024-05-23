@@ -6,6 +6,14 @@
         <h4 class="card-title loginblank">회원가입</h4>
         <form class="card-text" @submit.prevent="signUp">
           <div class="idblank">
+            <label for="last_name">Last name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <input type="text" v-model.trim="last_name" id="last_name">
+          </div>
+          <div class="first_name">
+            <label for="username">First name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <input type="text" v-model.trim="first_name" id="first_name">
+          </div>
+          <div class="idblank">
             <label for="username">ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
             <input type="text" v-model.trim="username" id="username">
           </div>
@@ -42,20 +50,45 @@
       </div>
     </div>
   </div> -->
-
+  
   <div class="img-container">
     <div class="left-div">
-        <RouterLink class="logo-text" style="color: black" :to="{ name: 'HomeView' }">GSC</RouterLink>
+      <RouterLink style="color: black" :to="{ name: 'HomeView' }"><img class="logo-text" src="/assets/Logo.png" alt="GSC"></RouterLink>
     </div>
     <div class="middle-div">
-      <div>
-        <h1 class="login-text">회원가입</h1><hr>
-        <form class="" @submit.prevent="signUp">
-          <input class="input-box" style="margin-top: 20px" type="text" v-model.trim="username" id="username" placeholder="아이디를 입력하세요"><br>
-          <input class="input-box" type="password" v-model.trim="password1" id="password" placeholder="비밀번호를 입력하세요">
-          <input class="input-box" style="margin-bottom: 20px" type="password" v-model.trim="password2" id="password" placeholder="비밀번호를 확인하세요"><hr>
-          <button class="signup-button" type="submit"> Sign Up </button><br>
-        </form>
+      <h1 class="login-text">회원가입</h1><hr>
+      <div class="low-div">
+        <div class="left-div">
+          <p class="text">아이디</p>
+          <p class="text">성</p>
+          <p class="text">이름</p>
+          <p class="text">비밀번호</p>
+          <p class="text">비밀번호 확인</p>
+          <p class="text">닉네임</p>
+          <p class="text">E-mail</p>
+        </div>
+        <div class="rigth-div">
+          <form class="" @submit.prevent="signUp">
+            <input class="input-box" type="text" v-model.trim="username" id="username" placeholder="아이디">
+            <input class="input-box" type="text" v-model.trim="last_name" id="last_name" placeholder="성">
+            <input class="input-box" type="text" v-model.trim="first_name" id="first_name" placeholder="이름">
+            <input class="input-box" type="password" v-model.trim="password1" id="password" placeholder="비밀번호">
+            <input class="input-box" type="password" v-model.trim="password2" id="password" placeholder="비밀번호 확인">
+            <input class="input-box" type="nickname" v-model.trim="nickname" id="nickname" placeholder="닉네임">
+            <input class="input-box" type="emailId" v-model.trim="emailId" id="email-Id" placeholder="이메일">
+            <div class="email-domain">         
+                <select class="input-box" v-model="emailDomain" id="email-domain" @change="checkDomain">
+                  <option value="">-------------</option>
+                  <option value="gmail.com">gmail.com</option>
+                  <option value="yahoo.com">yahoo.com</option>
+                  <option value="naver.com">naver.com</option>
+                  <option value="other">직접 추가</option>
+                </select>
+                <input v-if="emailDomain === 'other'" type="text" v-model.trim="customDomain">
+              </div>
+            <button class="signup-button" type="submit">Sign Up</button><br>
+          </form>
+        </div>
       </div>
     </div>
   </div>
@@ -80,6 +113,8 @@ const nickname = ref('')
 const emailId = ref('')
 const emailDomain = ref('')
 const customDomain = ref('')
+const last_name = ref('')
+const first_name = ref('')
 
 const signUp = function () {
   if (password1.value !== password2.value) {
@@ -94,6 +129,8 @@ const signUp = function () {
     password2: password2.value,
     nickname: nickname.value,
     email: email,
+    last_name: last_name,
+    first_name: last_name
   }
   store.signUp(payload)
 }
@@ -120,15 +157,14 @@ const checkDomain = () => {
 
 .left-div {
   width: 32%;
-  height: 100vh;
+  text-align: left;
   border-right: 1px solid white;
+  /* padding-top: 20px; */
+  padding-bottom: 60px;
 }
 .logo-text {
-  color: white;
-  font-size: 2rem; 
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  text-decoration: none;
-  padding: 30px;
+  width: 8rem;
+  padding: 20px;
 }
 .middle-div {
   width: 34%;
@@ -139,9 +175,20 @@ const checkDomain = () => {
   justify-content: center;
   align-items: center;
 }
+.low-div {
+  width:90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
 .login-text {
   width: 15rem;
   margin-bottom: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 80px;
 }
 .input-box {
   width:100%;
@@ -157,6 +204,18 @@ const checkDomain = () => {
   margin-left: 0px;
   background-color: black;
   color: white;
+}
+.text {
+  display: flex;
+  flex-direction: row;
+  padding-top: 10px;
+}
+.left-div {
+  width: 30%;
+  margin-bottom: 70px;
+}
+.rigth-div {
+  width: 70%;
 }
 /* .login-form {
   width: 100%;

@@ -1,15 +1,24 @@
 <template>
-    <div>
-      <h2>My Profile</h2>
-      <div v-if="user">
-        <h3>Username: {{ user.username }}</h3>
-        <h3>Nickname: seungwoo </h3>
-        <p>Email: {{ user.email }}</p>
-        <h3>Last Login: 2024년 05월 23일</h3>
+  <div class="">
+    <div v-if="user">
+      <div class="page-container">
+        <div class="left-container">
+          <p class="p-tag">Username</p>
+          <p class="p-tag">Nickname</p>
+          <p class="p-tag">Email</p>
+          <p class="p-tag">Last Login</p>
+        </div>
+        <div class="right-container">
+          <p class="p-tag">{{ user.username }}</p>
+          <p class="p-tag">nonggeun</p>
+          <p class="p-tag">{{ user.email }}</p>
+          <p class="p-tag">2024년 5월 24일</p>
+        </div>
       </div>
-      <p v-else>유저가 없어요</p>
     </div>
-  </template>
+    <h3 class="page-container" v-else>Log In 하고 와요</h3>
+  </div>
+</template>
   
 <script setup>
 import axios from 'axios'
@@ -53,7 +62,46 @@ const formatDate = (date) => {
 
 
   
-  <style scoped>
-  /* 스타일을 여기에 작성 */
+<style scoped>
+.page-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+
+}
+.page-row {
+
+  width: 80%;
+
+}
+.left-container {
+  border-right: 1px dashed gray;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width:45%;
+  padding: 15px;
+  margin-left: 20px;
+  text-align: left;
+}
+.right-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width:45%;
+  padding: 15px;
+  text-align: left;
+}
+.p-tag {
+  margin: 20px;
+  font-size: 20px;
+  text-align: left;
+
+}
+
   </style>
   

@@ -1,6 +1,6 @@
 <template>
   <div class="deposit-table ">
-    <h3>예금 조회</h3>
+    <h3 class="bold">예금 조회</h3>
 
     <label class="bank-select" for="bank-select">은행 선택&nbsp;</label>
     <select id="bank-select" v-model="selectedBank">
@@ -54,7 +54,7 @@
       </thead>
       <tbody>
           <tr v-for="comparison in filteredDeposits" :key="comparison.name + comparison.bank_name + comparison.interest_rate_type">
-            <td>{{ comparison.name }}</td>
+            <td @click="searchDeposit(comparison)">{{ comparison.name }}</td>
             <td>{{ comparison.bank_name }}</td>
             <td>{{ comparison.interest_rate_type }}</td>
             <td>{{ comparison['1개월'] || '-' }}</td>
@@ -95,6 +95,18 @@ export default {
             comparisonMap[key] = {
               name: deposit.base.name,
               bank_name: deposit.base.kor_co_nm,
+              bank_id: deposit.base.id,
+              bank_deposit_code: deposit.base.deposit_code,
+              bank_fin_co_no: deposit.base.fin_co_no,
+
+              bank_dcls_month: deposit.base.dcls_month,
+              bank_join_way: deposit.base.join_way,
+              bank_mtrt_int: deposit.base.mtrt_int,
+              bank_spcl_cnd: deposit.base.spcl_cnd,
+              bank_join_deny: deposit.base.join_deny,
+              bank_join_member: deposit.base.join_member,
+              bank_etc_note: deposit.base.etc_note,
+              bank_max_limit: deposit.base.max_limit,
               interest_rate_type: deposit.options.length > 0 ? deposit.options[0].intr_rate_type_nm : 'N/A',
               special_condition: deposit.base.spcl_cnd,
               '1개월': '-',
@@ -146,6 +158,17 @@ export default {
 
     onMounted(fetchData);
 
+    const searchDeposit = (key) => {
+      const deposit = deposits.value
+      console.log(deposit)
+      console.log(key)
+      if (deposit.name === key) {
+        router.push({ name: 'DepositDetailView', params: {id:deposit.base.id} })
+      
+      }
+
+    }
+
     return {
       deposits,
       depositComparison,
@@ -154,7 +177,8 @@ export default {
       filteredDeposits,
       sortKey,
       sortOrder,
-      uniqueBanks
+      uniqueBanks,
+      searchDeposit,
     };
   }
 };
@@ -201,5 +225,8 @@ td {
 }
 .bank-select {
   padding: 1rem 0rem;
+}
+.bold {
+  font-weight: 650;
 }
 </style>

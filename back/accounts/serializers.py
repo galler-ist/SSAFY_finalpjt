@@ -7,7 +7,7 @@ class CustomRegisterSerializer(DefaultRegisterSerializer):
     email = serializers.EmailField()
     class Meta:
         model = CustomUser
-        fields = ('username', 'password1', 'password2', 'email', 'nickname')
+        fields = ('username', 'password1', 'password2', 'email', 'nickname', 'last_name', 'first_name')
 
     def get_cleaned_data(self):
         data_dict = super().get_cleaned_data()
@@ -17,6 +17,6 @@ class CustomRegisterSerializer(DefaultRegisterSerializer):
     def save(self, request):
         user = super().save(request)
         user.nickname = self.validated_data.get('nickname')
-        user.email = self.validated_data.get('email')
+        # user.email = self.validated_data.get('email')
         user.save()
         return user

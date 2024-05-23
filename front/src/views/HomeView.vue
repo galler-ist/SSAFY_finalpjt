@@ -2,23 +2,23 @@
   <div>
     <div class="img-container">
       <div class="left-div">
-        <RouterLink class="logo-text" style="color: black" :to="{ name: 'HomeView' }"><img class="logo-img" src="/assets/Logo.png" alt="GSC"></RouterLink>
+        <RouterLink style="color: black" :to="{ name: 'HomeView' }"><img class="logo-img" src="/assets/Logo.png" alt="GSC"></RouterLink>
       </div>
       <div class="right-div">
         <div class="sub-container">
-          <RouterLink class="sub-text" :to="{ name: 'BankView' }">Bank</RouterLink>
+          <RouterLink class="sub-text" :to="{ name: 'BankView' }">은행찾기</RouterLink>
         </div>
         <div class="sub-container">
-          <RouterLink class="sub-text" :to="{ name: 'ExchangeView' }">Exchange</RouterLink>
+          <RouterLink class="sub-text" :to="{ name: 'ExchangeView' }">환율</RouterLink>
         </div>
         <div class="sub-container">
-          <RouterLink class="sub-text" :to="{ name: 'DepositList' }">Finance</RouterLink>
+          <RouterLink class="sub-text" :to="{ name: 'DepositList' }">예적금조회</RouterLink>
         </div>
         <div class="sub-container">
-          <RouterLink class="sub-text" :to="{ name: 'ArticleView' }">Articles</RouterLink>
+          <RouterLink class="sub-text" :to="{ name: 'ArticleView' }">커뮤니티</RouterLink>
         </div>
         <div class="last-sub-container">
-          <h3>5번</h3>
+          <RouterLink class="sub-text" :to="{ name: 'PortfolioList' }">포트폴리오</RouterLink>
         </div>
       </div>
     </div>
@@ -33,31 +33,25 @@
 
 <style scoped>
   .img-container {
-    background-image: url('assets/bgbg2.png');
+    background-image: url('assets/bgbg4.png');
     background-size: cover;
     background-position: center;
     width: 100%;
     height: 100vh;
     display: flex;
     position: relative;
-    filter: brightness(90%);
+
   }
+
 
   .left-div {
     width: 66%;
     height: 100vh;
-    border-right: 1px solid lightgray;
-  }
-  .logo-text {
-    color: white;
-    font-size: 2rem; 
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    text-decoration: none;
-    padding: 30px;
+    border-right: 1px solid rgb(127, 127, 127);
   }
   .logo-img {
     width: 8rem;
-    padding-top: 20px;
+    padding: 20px;
   }
   .right-div {
     width:34%;
@@ -72,26 +66,34 @@
     display: flex;
     width: 100%;
     height: 20vw;
-    border-bottom: 1px solid lightgray;
+    border-bottom: 1px solid rgb(127, 127, 127);
     align-items: center;
   }
   .last-sub-container {
+    display: flex;
+    width: 100%;
+    height: 20vw;
     width: 100%;
     height: 20vw;
   }
   .sub-container:hover {
     width: 100%;
-    background-color: rgba(55, 54, 54, 0.5);
-    color: beige;
+    background-color: rgba(0, 0, 0, 0.4);
+
+  }
+  .last-sub-container:hover {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+
   }
   .sub-text {
     padding: 60px 280px 60px 40px;
     text-decoration: none;
-    color: gray;
-    font-weight: 700;
-    font-size: 1000;
+    color: rgb(255, 255, 255);
+    font-weight: 1000;
+    font-size: 20px;
   }
   .sub-text:hover {
-    color: rgb(187, 138, 47);
+    color: rgb(225, 167, 78);
   }
 </style>
