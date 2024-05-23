@@ -2,12 +2,7 @@
     <div>
         <h1>여기는 포폴 사이트야</h1>
     </div>
-    <hr>
-    <hr>
-    <hr>
-    <hr>
-    <hr>
-    <hr>
+
     <nav>
       <RouterLink :to="{ name: 'PortfolioList' }">My Portfolio</RouterLink>|
       <RouterLink :to="{ name: 'PortfolioEdit', params: { id: id} }">Edit Portfolio</RouterLink>|

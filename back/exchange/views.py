@@ -9,7 +9,7 @@ from .serializers import ExchangeSerializer
 # Create your views here.
 
 
-EXCHANGE_API_URL = f'https://www.koreaexim.go.kr/site/program/financial/exchangeJSON?authkey=bQejh15dx4FXuA52WqlekvGRQMuVomFU&searchdata=20240520&data=AP01'
+EXCHANGE_API_URL = f'https://www.koreaexim.go.kr/site/program/financial/exchangeJSON?authkey=bQejh15dx4FXuA52WqlekvGRQMuVomFU&searchdata=20240522&data=AP01'
 
 @api_view(['GET'])
 def index(request):
