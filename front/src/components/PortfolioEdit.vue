@@ -1,29 +1,34 @@
 <template>
-    <div>
-      <h2>{{ isEditMode ? 'Edit' : 'Create' }} Portfolio</h2>
-      <form @submit.prevent="savePortfolio">
-        <div>
-            <label for="birth">Birth :</label>
-            <input type="date" v-model="portfolio.birth" />
+  <form @submit.prevent="savePortfolio">
+    <div class="page-container">
+      <div class="page-row">
+        <div class="left-container">
+          <div class="sub-left">
+            <label class="label-tag" for="birth">생년월일&nbsp;&nbsp;</label>
+            <label class="label-tag" for="household_size">가구원 수&nbsp;&nbsp;</label>
+          </div>
+          <div class="sub-right">
+            <input class="input-tag" type="date" v-model="portfolio.birth" />
+            <input class="input-tag" type="number" v-model="portfolio.household_size" />
+          </div>
         </div>
-        <div>
-            <label for="household_size">Household Size:</label>
-            <input type="number" v-model="portfolio.household_size" />
-        </div>
-        <div>
-            <label for="marital_status">Marital Status:</label>
-            <select v-model="portfolio.marital_status" @change="toggleChildren">
-            <option value="single">미혼</option>
-            <option value="married">기혼</option>
+        <div class="right-container">
+          <div class="sub-left">
+            <label class="label-tag" for="income">수입&nbsp;&nbsp;</label>
+            <label class="label-tag" for="marital_status">결혼 여부&nbsp;&nbsp;</label>
+            <label class="label-tag" for="has_children">자녀 유무&nbsp;&nbsp;</label>
+          </div>
+          <div class="sub-right">
+            <input class="input-tag" type="number" v-model="portfolio.income" step="0.01" />
+            <select class="input-tag" v-model="portfolio.marital_status" @change="toggleChildren">
+              <option value="single">미혼</option>
+              <option value="married">기혼</option>
             </select>
-        </div>
-        <div v-if="portfolio.marital_status === 'married'">
-            <label for="has_children">Has Children:</label>
-            <input type="checkbox" v-model="portfolio.has_children" />
-        </div>
-        <div>
-            <label for="income">Income:</label>
-            <input type="number" v-model="portfolio.income" step="0.01" />
+            <div v-if="portfolio.marital_status === 'married'">
+            <input class="input-tag" type="checkbox" v-model="portfolio.has_children" />
+            </div>
+          </div>
+          
         </div>
         <!-- <div>
             <label for="savings">Savings:</label>
@@ -32,9 +37,14 @@
             <label>{{ option.name }}</label>
             </div>
         </div> -->
-        <button type="submit">Save</button>
-        </form>
+
+      </div>
+      <div class="chartlist">
+        <p>Chart List</p>
+      </div>
+      <button class="btn" type="submit">Save</button>
     </div>
+  </form>
   </template>
   
 <script setup>
@@ -58,10 +68,12 @@ const isEditMode = ref(false)
   
 const fetchPortfolio = async () => {
     const username = store.username
+    console.log(portfolio.value.income)
   try {
     console.log('store.API_URL 는', store.API_URL)
     console.log('store.username 는', store.username)
     console.log('store.token 는', store.token)
+
     const response = await axios.get(`${store.API_URL}/portfolio/api/user/${username}/`, {
       headers: {
         Authorization: `Token ${store.token}`
@@ -143,5 +155,58 @@ const savePortfolio = async () => {
 </script>
 
 <style scoped>
-/* 스타일을 여기에 작성 */
+.page-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 30px;
+}
+.page-row {
+  display: flex;
+  flex-direction: row;
+  width: 80%;
+
+}
+.left-container {
+  border-right: 1px dashed gray;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width:45%;
+  padding: 15px;
+  margin-left: 60px;
+}
+.right-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width:45%;
+
+  padding: 15px;
+}
+.sub-left {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+.sub-right {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+}
+.input-tag {
+  margin: 10px;
+}
+.label-tag {
+  margin: 10px;
+}
+.chartlist {
+  border: 1px solid gray;
+  width: 65%;
+  text-align: center;
+  height: 50rem;
+}
 </style>

@@ -34,10 +34,10 @@ export const useCounterStore = defineStore('counter', () => {
   }
 
   const signUp = async function (payload) {
-    const { username, password1, password2, nickname, email } = payload
+    const { username, password1, password2, nickname, email, last_name, first_name } = payload
     try {
       const response = await axios.post(`${API_URL}/accounts/signup/`, {
-        username, password1, password2, nickname, email
+        username, password1, password2, nickname, email, last_name, first_name
       })
       console.log('회원가입 성공!')
       const password = password1

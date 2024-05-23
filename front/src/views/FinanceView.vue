@@ -53,15 +53,11 @@
     top:17px;
     width: 100%;
   }
-
-
-
   .nav-container {
     margin: 20px;
     text-align: center;
     /* position: sticky; */
   }
-  
   nav a {
     font-size: 20px;
     text-decoration: none;
@@ -71,7 +67,7 @@
   
   nav a.router-link-exact-active {
     font-weight: bold;
-    border-bottom: 3px solid #42b983;
+    border-bottom: 3px solid rgba(241, 139, 49, 0.884);
   }
 
   .exchange-bg {

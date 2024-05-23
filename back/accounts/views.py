@@ -14,6 +14,7 @@ def user_profile(request):
         user = User.objects.get(id=request.user.id)
         data = {
             'username': user.username,
+            # 'nickname': user.nickname, # 이거 바꿈
             'last_login': user.last_login
         }
         return JsonResponse(data)

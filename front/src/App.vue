@@ -26,23 +26,24 @@
     <div class="nav1">
       <RouterLink style="color: black" :to="{ name: 'HomeView' }"><img class="logo-img" src="/assets/Logo.png" alt="GSC"></RouterLink>
       <div class="nav2">
-        <RouterLink class="cate-form" :to="{ name: 'BankView' }">지도</RouterLink>
-        <RouterLink class="cate-form" :to="{ name: 'ExchangeView' }">환율</RouterLink>
-        <RouterLink class="cate-form" :to="{ name: 'DepositList' }">예적금</RouterLink>
-        <RouterLink class="cate-form" :to="{ name: 'ArticleView' }">게시판</RouterLink>
+        <RouterLink class="cate-form bold" :to="{ name: 'BankView' }">은행찾기</RouterLink>
+        <RouterLink class="cate-form bold" :to="{ name: 'ExchangeView' }">환율</RouterLink>
+        <RouterLink class="cate-form bold" :to="{ name: 'DepositList' }">예적금조회</RouterLink>
+        <RouterLink class="cate-form bold" :to="{ name: 'ArticleView' }">커뮤니티</RouterLink>
+        <RouterLink class="cate-form bold" :to="{ name: 'PortfolioList' }">포트폴리오</RouterLink>
       </div>
       <div class="login-form d-flex">
-        <!-- <p><RouterLink :to="{ name: 'Profile' }">님 환영합니다.</RouterLink></p> -->
-        <button class="btn login-text w-10" v-if="!isLogin" :to="{ name: 'SignUpView' }" value="Sign In">Sign In</button>
-        <button class="btn login-text w-10" v-if="!isLogin" :to="{ name: 'LogInView' }" value="Log In">Log In</button>
+        <p><RouterLink class="cate-form1" :to="{ name: 'Profile' }">{{ counterStore.username }} 님</RouterLink></p>
+        <RouterLink class="btn login-text" v-if="!isLogin" :to="{ name: 'SignUpView' }" value="Sign In">Sign In</RouterLink>
+        <RouterLink class="btn login-text" v-if="!isLogin" :to="{ name: 'LogInView' }" value="Log In">Log In</RouterLink>
         <input class="btn login-form" v-else @click="logOut" :to="{ name: 'LogInView' }" value="Log Out">
       </div>
     </div>
+    <RouterView />
   </div>
 
   
 
-  <RouterView />
   <footer class="footerstyle">
     <div class="foot">
       <div class="seung">
@@ -105,7 +106,18 @@ const logOut = () => {
   font-size: 20px;
   text-decoration: none;
   color: black;
-  margin: 0px 32px;
+  margin: 0px 10px;
+}
+.cate-form1 {
+  /* margin: 0px 20px; */
+  padding-top: 20px;
+  font-size: 13px;
+  text-decoration: none;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
 }
 .login-form {
   margin-left: auto;
@@ -117,7 +129,8 @@ const logOut = () => {
   /* padding-left: 100px; */
 }
 .login-text {
-  margin-right: 20px;
+  /* margin-left: 20px; */
+  padding:17px;
 }
 .logo-img {
     width: 8rem;
@@ -175,6 +188,9 @@ bottom: 0;
   display: flex;
   flex-direction: column;
   text-align: left;
+}
+.bold {
+  font-weight: 549;
 }
 </style>
 

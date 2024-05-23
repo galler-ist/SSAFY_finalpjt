@@ -4,8 +4,8 @@ from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 class CustomUser(AbstractUser):
-    nickname = models.CharField(max_length=50, unique=True)
-    email = models.EmailField(unique=True)
+    nickname = models.CharField(max_length=50)
+    email = models.EmailField()
 
     def __str__(self):
         return self.username

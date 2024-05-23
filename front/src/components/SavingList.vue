@@ -1,6 +1,6 @@
 <template>
   <div class="saving-table">
-    <h3>적금 조회</h3>
+    <h3 class="bold">적금 조회</h3>
 
     <label class="bank-select" for="bank-select">은행 선택&nbsp;</label>
     <select id="bank-select" v-model="selectedBank">
@@ -195,5 +195,8 @@ td {
 }
 .bank-select {
   padding: 1rem 0rem;
+}
+.bold {
+  font-weight: 650;
 }
 </style>

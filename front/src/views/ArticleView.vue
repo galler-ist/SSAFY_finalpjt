@@ -1,9 +1,6 @@
 
 <template >
   <div>
-    <div class="blank-div">
-      
-    </div>
     <div class="">
       <h1 class="title-container">게시판</h1>
     </div>
@@ -142,7 +139,7 @@ onMounted(() => {
   padding: 10px 20px;
   margin: 20px auto;
   width: 150px;
-  background-color: #007bff;
+  background-color: rgba(241, 139, 49, 0.884);
   color: white;
   text-decoration: none;
   border-radius: 4px;
@@ -150,6 +147,7 @@ onMounted(() => {
 }
 
 .create-link:hover {
-  background-color: #0056b3;
+  background-color: rgba(195, 112, 39, 0.84);
+  color: white;;
 }
 </style>

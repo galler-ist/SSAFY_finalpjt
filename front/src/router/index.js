@@ -16,6 +16,7 @@ import PortfolioList from '@/components/PortfolioList.vue'
 import PortfolioEdit from '@/components/PortfolioEdit.vue'
 import Profile from '@/components/Profile.vue'
 
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -107,6 +108,11 @@ const router = createRouter({
         }
       ]
     },
+    {
+      path: '/portfolio',
+      redirect: '/portfolio/portfoliolist'
+    },
+
   ]
 })
 

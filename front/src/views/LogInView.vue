@@ -25,7 +25,7 @@
   <div>
     <div class="img-container">
       <div class="left-div">
-        <RouterLink class="logo-text" style="color: black" :to="{ name: 'HomeView' }">GSC</RouterLink>
+        <RouterLink style="color: black" :to="{ name: 'HomeView' }"><img class="logo-text" src="/assets/Logo.png" alt="GSC"></RouterLink>
       </div>
       <div class="right-div">
         <div class="">
@@ -81,11 +81,8 @@ const logIn = function () {
   border-right: 1px solid white;
 }
 .logo-text {
-  color: white;
-  font-size: 2rem; 
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  text-decoration: none;
-  padding: 30px;
+    width: 8rem;
+    padding: 20px;
 }
 .right-div {
   width: 34%;
