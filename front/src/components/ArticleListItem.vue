@@ -29,7 +29,7 @@ defineProps({
 
 .title-column {
   width: 60%;
-  padding: 12px 0px;
+  padding: 12px 12px;
   border-bottom: 1px solid #ddd;
   color: black;
 }

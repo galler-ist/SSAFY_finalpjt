@@ -1,38 +1,59 @@
 <template>
-  <div class="image-container bg-image">
-    <img class="bg w-100 exchange-bg " src="/assets/exchange2_bg.png" alt="...">
+  <div class="">
     <h1 class="title-container">환율 계산기</h1>
   </div>
-  <div class="main-container">
-    <div class="exchange-container">
-      <div>
-        <p>원화 입력</p>
-        <input type="number" v-model="amount" id="amount" required />
-      </div>
-      <div>
-        <p>타국 통화</p>
-        <select v-model="toCurrency" id="toCurrency" required>
-          <option v-for="currency in currencies" :key="currency.cur_unit" :value="currency.cur_unit">{{ currency.cur_unit }} - {{ currency.cur_nm }}</option>
-        </select>
-      </div>
-    </div>
-    <button class="custom-button">
-      <img style="width: 30px" class="exchange-icon" src="/assets/exchange_icon.png" alt="...">
-    </button>
-    <div class="exchange-container">
-      <div>
-        <p>원화 입력</p>
-        <input type="number" v-model="amount" id="amount" required />
-      </div>
-      <div>
-        <p>타국 통화</p>
-        <select v-model="toCurrency" id="toCurrency" required>
-          <option v-for="currency in currencies" :key="currency.cur_unit" :value="currency.cur_unit">{{ currency.cur_unit }} - {{ currency.cur_nm }}</option>
-        </select>
-      </div>
-    </div>
+  <div class="main-main-container">
+  <form @submit.prevent="calculate">
+      <div class="main-container">
+        <div class="exchange-container">
+          <p>원화 입력</p>
+          <div class="last-container">
+            <input class="won-input" type="number" v-model="amount" id="amount" required />
+            <button class="custom-button">환전</button>
+          </div>
+          <div>
+            <p>타국 통화</p>
+            <select v-model="toCurrency" id="toCurrency" required>
+              <option v-for="currency in currencies" :key="currency.cur_unit" :value="currency.cur_unit">{{ currency.cur_unit }} - {{ currency.cur_nm }}</option>
+            </select>
+            <span>{{ toCurrencySymbol }}</span>
+          </div>
+          <h4>{{ amount }} KRW = {{ result }} {{ toCurrency }}</h4>
+        </div>
+      </div> 
+    </form>
     
+  <form @submit.prevent="calculateReverse">
+      <div class="main-container">
+        <div class="exchange-container">
+          <p>타국 통화</p>
+          <div class="last-container">
+            <select v-model="toCurrency" id="toCurrency" required>
+              <option v-for="currency in currencies" :key="currency.cur_unit" :value="currency.cur_unit">{{ currency.cur_unit }} - {{ currency.cur_nm }}</option>
+            </select>
+            <button class="custom-button">환전</button>
+          </div>
+          <p>금액</p>
+          <input  class="won-input" type="number" v-model="foreignAmount" id="foreignAmount" required />
+          <h4>결과: {{ foreignAmount }} {{ toCurrency }} = {{ reverseResult }} KRW</h4>
+        </div>
+        <div>
+          <span>{{ toCurrencySymbol }}</span>
+          
+        </div>
+      </div>  
+    </form>
+    <p class="exchange100 explain">인도네시아 루피아(IDR), 일본 옌(JPY)은 100단위로 들어감</p>
+
   </div>
+
+      
+      
+      
+      
+      
+
+
 
 
   <!-- <hr><hr><hr>
@@ -73,6 +94,7 @@
 </template>
 
 <script>
+
 export default {
   data() {
     return {
@@ -162,37 +184,14 @@ export default {
 </script>
 
 <style scoped>
-.image-container {
-  position: relative;
-  text-align: center;
-}
-
-.exchange-bg {
-  width: 100%;
-  height: 18rem;
-  opacity: 0.7;
-}
-
-.image-container::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-}
-
 .title-container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-  font-weight: 500;
-  font-size: 2rem;
-  text-align: center;
-  z-index: 1;
+  display: flex;
+  justify-content: center;
+  padding-top: 15vh;
+  width: 100%;
+  height: 30vh;
+  color: black;
+  font-weight: 700;
 }
 
 .all-container {
@@ -207,18 +206,21 @@ export default {
   display: flex;
   align-items: center;
 }
+.won-input {
+  width: 15rem;
+}
 
 .krw-container {
   display: flex;
   width: 5rem;
-  border: 1px solid gray;
+  border: 1px solid rgb(255, 255, 255);
   border-radius: 5px 0 0 5px;
 }
 
 .county-money {
   display: flex;
   flex-wrap: nowrap;
-  border: 1px solid gray;
+  border: 1px solid rgb(255, 255, 255);
   border-radius: 0 5px 5px 0;
 }
 
@@ -226,17 +228,31 @@ export default {
   color: gray;
 }
 
+.last-container {
+  display: flex;
+  flex-direction: row;
+}
+
 form div {
   margin-bottom: 10px;
 }
 
 .exchange-container {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
   border: 1px solid gray;
   border-radius: 10px;
   box-shadow: 1px 1px 1px 1px lightgray;
   margin: 10px;
   padding: 10px;
   width: 40%;
+}
+.main-main-container {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(248, 248, 248);
+  border-top: 1px solid rgb(230, 230, 230);
 }
 .main-container {
   display: flex;
@@ -264,5 +280,8 @@ form div {
   border: 1px solid white; /* 버튼 경계선 흰색 */
   padding: 5px; /* 이미지를 더 잘 보이도록 패딩 추가 */
   border-radius: 4px; /* 경계선 모서리 둥글게 */
+}
+.explain {
+  text-align: center;
 }
 </style>

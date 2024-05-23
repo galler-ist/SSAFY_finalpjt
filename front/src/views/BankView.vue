@@ -1,12 +1,10 @@
 <template>
-  <div class="image-container bg-image">
-    <img class="w-100 exchange-bg" src="/assets/map6_bg.png" alt="...">
+  <div class="">
     <h1 class="title-container">주변 은행 찾기</h1>
   </div>
+  <div class="main-container">
     <div class="bank-container">
       <div class="form-container">
-
-
         <div class="card" style="width: 18rem;">
           <form class="card-body" id="filter-form" @submit.prevent="searchBank">
             <h6 class="card-title">지역선택
@@ -59,6 +57,7 @@
       <br>
       <div id="map" class="map"></div>
     </div>
+  </div>
   </template>
   
   <script>
@@ -318,6 +317,19 @@
   </script>
 
   <style scoped>
+  .title-container {
+  display: flex;
+  justify-content: center;
+  padding-top: 15vh;
+  width: 100%;
+  height: 30vh;
+  color: black;
+  font-weight: 700;
+}
+.main-container {
+  background-color: rgb(248, 248, 248);
+  border-top: 1px solid rgb(230, 230, 230);
+}
   .bank-container {
     display: flex;
     justify-content: center;
@@ -334,32 +346,21 @@
   .map {
     flex-grow: 1;
     height: 600px;
-    border: 1px solid gray;
+    border: 1px solid rgb(200, 200, 200);
     border-radius: 10px;
-    z-index: -1;
+    /* z-index: 0; */
   }
   .bg {
     width: 100%;
     height: 20rem;
     opacity: 0.7;
   }
-  /* .overlay {
-    position: absolute;
-    top: 20%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    font-weight: 500;
-    font-size: 2rem;
-    text-align: center;
-  } */
+
   .container {
     position: relative;
     width: 100%;
   }
-  .font {
-    font-family: 'NPSfont_regular';
-  }
+
   /* .title-container {
     padding: 7rem 0rem 3rem 0rem;
     text-align: center;
@@ -386,7 +387,7 @@
   text-align: center;
   z-index: 1;
 } */
-.title-container {
+/* .title-container {
     position: absolute;
     top: 20%;
     left: 50%;
@@ -396,22 +397,8 @@
     font-size: 2rem;
     text-align: center;
     z-index: 1;
-  }
-  .exchange-bg {
-  width: 100%;
-  height: 18rem;
-  opacity: 0.7;
-}
+  } */
 
-.image-container::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-}
 .bg-image {
   width: 100%;
   height: 100%;

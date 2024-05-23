@@ -1,16 +1,27 @@
 <template>
-  <div class="image-container bg-image">
+  <!-- <div class="image-container bg-image">
     <img class="bg w-100 exchange-bg " src="/assets/saving_bg.png">
-    <h1 class="title-container">Finance Products</h1>
+    <h1 class="title-container">예적금 조회</h1>
   </div>
     <div>
-      <nav>
+    </div> -->
+  <div class="top-flex">
+    <div class="blank-div">
+      
+    </div>
+    <div>
+      <h1 class="title-container">예적금 조회</h1>
+      <nav class="nav-sticky nav-container">
         <RouterLink to="/finance/deposit">예금</RouterLink>
         <RouterLink to="/finance/saving">적금</RouterLink>
       </nav>
-      <RouterView></RouterView>
+      <div class="main-container">
+        <RouterView></RouterView>
+      </div>
     </div>
-  </template>
+  </div>
+
+</template>
   
   <script>
   export default {
@@ -19,54 +30,55 @@
   </script>
   
   <style scoped>
-  nav {
-    margin-bottom: 20px;
+
+  .title-container {
+
+    display: flex;
+    justify-content: center;
+    padding-top: 15vh;
+    width: 100%;
+    height: 30vh;
+    color: black;
+    font-weight: 700;
+  }
+  .main-container {
+    background-color: rgb(248, 248, 248);
+    border-top: 1px solid rgb(230, 230, 230);
+  }
+  .nav-sticky {
+    position: sticky;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top:17px;
+    width: 100%;
+  }
+
+
+
+  .nav-container {
+    margin: 20px;
     text-align: center;
-    font-size: 20px;
+    /* position: sticky; */
   }
   
   nav a {
-    margin-right: 10px;
+    font-size: 20px;
     text-decoration: none;
-    color: #42b983;
+    color: black;
+    margin: 0px 33px;
   }
   
   nav a.router-link-exact-active {
     font-weight: bold;
+    border-bottom: 3px solid #42b983;
   }
-  .title-container {
-    position: absolute;
-    top: 20%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    font-weight: 500;
-    font-size: 2rem;
-    text-align: center;
-    z-index: 1;
-  }
+
   .exchange-bg {
   width: 100%;
   height: 18rem;
   opacity: 0.7;
-}
+  }
 
-.image-container::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-}
-.bg-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
-  /* or use -webkit-mask-image for better compatibility with some browsers */
-  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
-}
   </style>
   

@@ -1,27 +1,28 @@
 
 <template >
-
   <div>
-   
-    <!-- <img class="bg w-100 article-bg" src="/assets/exchange_bg.png" alt="..."> -->
-    <h1 class="sample-text">게시판</h1>
-  </div>
-  <div>
-    <div class="article-container">
-      <div class="article-table cate">
-        <h5 class="title-cate">제목</h5>
-        <h5 class="username-cate">작성자</h5>
-        <h5 class="dates-cate">날짜</h5>
+    <div class="blank-div">
+      
+    </div>
+    <div class="">
+      <h1 class="title-container">게시판</h1>
+    </div>
+    <div class="main-container">
+      <div class="article-container">
+        <div class="article-table cate">
+          <h5 class="title-cate">제목</h5>
+          <h5 class="username-cate">작성자</h5>
+          <h5 class="dates-cate">날짜</h5>
+        </div>
+          
+        <ArticleList />
+        <input class="search-input" type="text" placeholder="작성자, 제목을 입력하세요">
+        <RouterLink :to="{ name: 'CreateView' }" class="create-link">
+          글쓰기
+        </RouterLink>
       </div>
-        
-      <ArticleList />
-      <input class="search-input" type="text" placeholder="작성자, 제목을 입력하세요">
-      <RouterLink :to="{ name: 'CreateView' }" class="create-link">
-        글쓰기
-      </RouterLink>
     </div>
   </div>
-
 </template>
 
 <script setup>
@@ -38,6 +39,21 @@ onMounted(() => {
 </script>
 
 <style scoped>
+
+.title-container {
+  display: flex;
+  justify-content: center;
+  padding-top: 15vh;
+  width: 100%;
+  height: 30vh;
+  color: black;
+  font-weight: 700;
+}
+.main-container {
+  background-color: rgb(248, 248, 248);
+  border-top: 1px solid rgb(230, 230, 230);
+}
+
 .search-input {
   display: block;
   padding: 8px 12px;
@@ -71,7 +87,7 @@ onMounted(() => {
   flex-direction: column;
   align-items: center;
   margin: 0 auto;
-  padding:0;
+  padding:30px 0px;
   width: 65%;
 }
 

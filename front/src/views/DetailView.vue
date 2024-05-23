@@ -6,6 +6,7 @@
         <RouterLink class="link" :to="{ name: 'ArticleView' }">자유게시판</RouterLink>
         <div v-if="article">
         <h2>{{ article.title }}</h2>
+        <hr>
         <p>{{ article.username }}</p>
         <p>{{ article.created_at.substring(0, 10) }}</p>
         <hr>
