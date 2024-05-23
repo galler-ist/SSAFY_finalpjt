@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg bg-body-lg custom-navbar font">
+  <!-- <nav class="navbar navbar-expand-lg bg-body-lg custom-navbar my-nav">
     <div class="container-fluid">
       <RouterLink class="navbar-brand" style="color: black" :to="{ name: 'HomeView' }">GSC</RouterLink>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -13,14 +13,35 @@
           <RouterLink class="nav-link" :to="{ name: 'PortfolioView' }">Portfolio</RouterLink>
           <RouterLink class="nav-link" :to="{ name: 'ArticleView' }">Articles</RouterLink>
         </div>
-        <div class="navbar-nav ms-auto">
+        <div class="navbar-nav">
           <RouterLink class="nav-link" v-if="!isLogin" :to="{ name: 'SignUpView' }">Sign In</RouterLink>
           <RouterLink class="nav-link" v-if="!isLogin" :to="{ name: 'LogInView' }">Log In</RouterLink>
           <input class="nav-link btn input-link" v-else @click="logOut" :to="{ name: 'LogInView' }" value="Log Out">
         </div>
       </div>
     </div>
-  </nav>
+  </nav> -->
+
+  <div>
+    <div class="nav1">
+      <RouterLink style="color: black" :to="{ name: 'HomeView' }"><img class="logo-img" src="/assets/Logo.png" alt="GSC"></RouterLink>
+      <div class="nav2">
+        <RouterLink class="cate-form" :to="{ name: 'BankView' }">지도</RouterLink>
+        <RouterLink class="cate-form" :to="{ name: 'ExchangeView' }">환율</RouterLink>
+        <RouterLink class="cate-form" :to="{ name: 'DepositList' }">예적금</RouterLink>
+        <RouterLink class="cate-form" :to="{ name: 'ArticleView' }">게시판</RouterLink>
+      </div>
+      <div class="login-form d-flex">
+        <!-- <p><RouterLink :to="{ name: 'Profile' }">님 환영합니다.</RouterLink></p> -->
+        <button class="btn login-text w-10" v-if="!isLogin" :to="{ name: 'SignUpView' }" value="Sign In">Sign In</button>
+        <button class="btn login-text w-10" v-if="!isLogin" :to="{ name: 'LogInView' }" value="Log In">Log In</button>
+        <input class="btn login-form" v-else @click="logOut" :to="{ name: 'LogInView' }" value="Log Out">
+      </div>
+    </div>
+  </div>
+
+  
+
   <RouterView />
   <footer class="footerstyle">
     <div class="foot">
@@ -60,50 +81,63 @@ const logOut = () => {
 </script>
 
 <style scoped>
-.font-size {
-  font-size: 20px;
-}
-.navbar {
-  padding: 1% 5%;
-  width: 100%;
+.nav1 {
   position: fixed;
-  top: 0;
-  left: 0;
-  background-color: rgb(75, 75, 75, 0);/* 기본 상태에서 투명 */
-  z-index: 1; /* 다른 요소들 위에 표시 */
-
-  transition: background-color 0.5s ease, color 0.5s ease; /* 배경색과 글자색 변환 애니메이션 */
-}
-
-.navbar:hover {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: white;
   width: 100%;
-  background-color: rgba(234, 234, 234, 0.3); /* 마우스 올렸을 때 흰색 */
+  height: 4rem;
+}
+.nav2 {
+  display: flex;
+  flex: row;
+  align-items: center;
+}
+.logo-form {
+  font-size: 30px;
+  text-decoration: none;
+  color: black;
+  margin: 0px 30px;
+}
+.cate-form {
+  font-size: 20px;
+  text-decoration: none;
+  color: black;
+  margin: 0px 32px;
+}
+.login-form {
+  margin-left: auto;
+  font: 15px;
+  text-decoration: none;
+  display: flex;
+  /* align-items: flex-end; */
+  color: black;
+  /* padding-left: 100px; */
+}
+.login-text {
+  margin-right: 20px;
+}
+.logo-img {
+    width: 8rem;
+    padding-top: 20px;
+  }
 
+
+
+
+
+.my-nav {
+  position: fixed
 }
 
-.navbar .nav-link,
-.navbar .navbar-brand {
-  color: rgb(255, 255, 255); /* 기본 글자색 흰색 */
-  transition: color 0.3s ease; /* 글자색 변환 애니메이션 */
-}
-
-.navbar:hover .nav-link,
-.navbar:hover .navbar-brand {
-  color: black; /* 마우스 올렸을 때 글자색 검정색 */
-}
-
-.navbar .nav-link.btn {
-  border: none;
-  background: none;
-  cursor: pointer;
-}
 .footerstyle {
 border-top: 1px solid rgb(229, 229, 229);
-margin-top: 3rem;
 padding: 3rem;
 background-color: rgb(246, 246, 246);
 text-align: center;
-bottom: 0%
+bottom: 0;
 }
 .insta-icon {
   width: 30px;

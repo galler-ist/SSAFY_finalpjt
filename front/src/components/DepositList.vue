@@ -1,5 +1,5 @@
 <template>
-  <div class="deposit-table">
+  <div class="deposit-table ">
     <h3>예금 조회</h3>
 
     <label class="bank-select" for="bank-select">은행 선택&nbsp;</label>
@@ -11,40 +11,40 @@
     <table class="table-container">
       <thead>
         <tr>
-          <th>상품명</th>
-          <th>은행명</th>
-          <th>금리유형</th>
-          <th @click="sortTable('1개월')">저축 기간-1개월
+          <th class="th1">상품명</th>
+          <th class="th2">은행명</th>
+          <th class="th3">유형</th>
+          <th class="th3" @click="sortTable('1개월')">1개월
             <span v-if="sortKey === '1개월'">
               <span v-if="sortOrder === 1">▲</span>
               <span v-else>▼</span>
             </span>
           </th>
-          <th @click="sortTable('3개월')">저축 기간-3개월
+          <th class="th3" @click="sortTable('3개월')">3개월
             <span v-if="sortKey === '3개월'">
               <span v-if="sortOrder === 1">▲</span>
               <span v-else>▼</span>
             </span>
           </th>
-          <th @click="sortTable('6개월')">저축 기간-6개월
+          <th class="th3" @click="sortTable('6개월')">6개월
             <span v-if="sortKey === '6개월'">
               <span v-if="sortOrder === 1">▲</span>
               <span v-else>▼</span>
             </span>
           </th>
-          <th @click="sortTable('12개월')">저축 기간-12개월
+          <th class="th3" @click="sortTable('12개월')">12개월
             <span v-if="sortKey === '12개월'">
               <span v-if="sortOrder === 1">▲</span>
               <span v-else>▼</span>
             </span>
           </th>
-          <th @click="sortTable('24개월')">저축 기간-24개월
+          <th class="th3" @click="sortTable('24개월')">24개월
             <span v-if="sortKey === '24개월'">
               <span v-if="sortOrder === 1">▲</span>
               <span v-else>▼</span>
             </span>
           </th>
-          <th @click="sortTable('36개월')">저축 기간-36개월
+          <th class="th3" @click="sortTable('36개월')">36개월
             <span v-if="sortKey === '36개월'">
               <span v-if="sortOrder === 1">▲</span>
               <span v-else>▼</span>
@@ -161,6 +161,9 @@ export default {
 </script>
 
 <style scoped>
+.sub-title-container {
+  margin-top: 20px;
+}
 table {
   width: 100%;
   border-collapse: collapse;
@@ -168,20 +171,29 @@ table {
 th, td {
   border: 1px solid #ddd;
   padding: 8px;
+
 }
 th {
   background-color: #f2f2f2;
   text-align: center;
   cursor: pointer;
+
 }
 td {
   text-align: center;
 }
-
+.th1 {
+  width: 30%;
+}
+.th2 {
+  width: 14%;
+}
+.th3 {
+  width: 8%;
+}
 .deposit-table {
   width: 65%;
-  margin: 0 auto;
-  
+  margin: 30px auto;
 }
 .table-container {
   width: 100%;
