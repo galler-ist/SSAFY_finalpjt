@@ -11,8 +11,15 @@ from .serializers import ExchangeSerializer
 
 EXCHANGE_API_URL = f'https://www.koreaexim.go.kr/site/program/financial/exchangeJSON?authkey=bQejh15dx4FXuA52WqlekvGRQMuVomFU&searchdata=20240522&data=AP01'
 
+
 @api_view(['GET'])
 def index(request):
+    exist_response = Exchange.objects.all()
+    
+    if exist_response.exists():
+        serializer = ExchangeSerializer(exist_response, many=True)
+        return Response(serializer.data)
+    
     try:
         response = requests.get(EXCHANGE_API_URL)
         response.raise_for_status()
@@ -24,17 +31,13 @@ def index(request):
     if not isinstance(data, list):
         return Response({"error": "Invalid data format"}, status=status.HTTP_400_BAD_REQUEST)
 
-    exist_response = Exchange.objects.all()
-    
-    # exist_response가 있으면 지워주고 / serializer 해줌
     if data:
-        if exist_response:
-            Exchange.objects.all().delete()
-            
+        Exchange.objects.all().delete()
+        
         serializer = ExchangeSerializer(data=data, many=True)
         
         if not serializer.is_valid():
-            print('검증오류 serializer.errors : ',serializer.errors)  # 검증 오류를 로그로 출력
+            print('Validation error serializer.errors:', serializer.errors)  # Log validation errors
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
         serializer.save()

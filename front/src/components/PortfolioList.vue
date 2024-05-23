@@ -18,7 +18,8 @@
               <li v-for="saving in portfolio.savings" :key="saving.saving_code">
                 {{ saving.name }} ({{ saving.kor_co_nm }})
               </li>
-            </ul>       
+            </ul>    
+            <p>score: {{ score }}</p>   
           </div>
         <div v-else>
             <h2>포트폴리오가 아직 없어요</h2>
@@ -28,12 +29,13 @@
   
 <script setup>
   import axios from 'axios'
-  import { ref, onMounted, watch } from 'vue'
+  import { ref, onMounted, watch, computed } from 'vue'
   import { useCounterStore } from '@/stores/counter.js' 
 
   const store = useCounterStore()
   const portfolio = ref([])
-  
+  const score = ref(0)
+
   const fetchPortfolio = async () => {
   try {
     const response = await axios.get(`${store.API_URL}/portfolio/api/user/${store.username}/`, {
@@ -42,15 +44,44 @@
       }
     })
     portfolio.value = response.data
+    await calculateScore()
   } catch (error) {
     console.error('Error fetching portfolio:', error)
   }
 }
+
+
+const calculateScore = async () => {
+  if (!portfolio.value) return
+  try {
+    const response = await axios.post(`${store.API_URL}/portfolio/score/`, {
+      birth: portfolio.value.birth,
+      household_size: portfolio.value.household_size,
+      marital_status: portfolio.value.marital_status,
+      has_children: portfolio.value.has_children,
+      income: portfolio.value.income
+    }, {
+      headers: {
+        Authorization: `Token ${store.token}`,
+        'Content-Type': 'application/json'
+      }
+    })
+    score.value = response.data.score
+  } catch (error) {
+    console.error('Error calculating score:', error)
+  }
+}
+
+
+
+
+
+
+
+
 onMounted(() => {
   fetchPortfolio();
 });
-
-
 //   const fetchPortfolio = async () => {
 //   if (!store.token) {
 //     console.error('Token is not available')

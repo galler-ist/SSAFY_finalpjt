@@ -30,6 +30,7 @@
         <RouterLink class="cate-form" :to="{ name: 'ExchangeView' }">환율</RouterLink>
         <RouterLink class="cate-form" :to="{ name: 'DepositList' }">예적금</RouterLink>
         <RouterLink class="cate-form" :to="{ name: 'ArticleView' }">게시판</RouterLink>
+        <RouterLink class="cate-form" :to="{ name: 'PortfolioList' }">포트폴리오</RouterLink>
       </div>
       <div class="login-form d-flex">
         <!-- <p><RouterLink :to="{ name: 'Profile' }">님 환영합니다.</RouterLink></p> -->
