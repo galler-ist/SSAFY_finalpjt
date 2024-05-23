@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'accounts',
     'exchange',
     'finance',
+    'portfolio',
     'rest_framework',
     'rest_framework.authtoken',
     'dj_rest_auth',
@@ -164,4 +165,5 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'accounts.User'
+AUTH_USER_MODEL = 'accounts.CustomUser'
+

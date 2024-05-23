@@ -46,13 +46,9 @@
               </select>
             </h6>
             <button class="btn w-100"  type="submit">검색</button>
-            <button class="btn w-100" @click="showCurrentLocation">현재 나의 위치로 보기</button>
           </form>
+          <button class="btn w-100" @click="showCurrentLocation">현재 나의 위치로 보기</button>
         </div>
-
-
-
-        
     </div>
       <br>
       <div id="map" class="map"></div>
@@ -168,15 +164,14 @@
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(position => {
           console.log(position,"positionnnnnnn")
-          console.log(position.coords,"position.coordsssssssssss")
           const lat = position.coords.latitude;
           const lng = position.coords.longitude;
           const currentPosition = new kakao.maps.LatLng(lat, lng);
-
+          console.log(lat,lng, '현재위치')
           // 지도 중심을 현재 위치로 이동
           this.map.setCenter(currentPosition);
           this.map.setLevel(4);
-
+          
           // 기존 마커가 있으면 제거
           if (this.currentMarker) {
             this.currentMarker.setMap(null);

@@ -33,28 +33,43 @@ export const useCounterStore = defineStore('counter', () => {
       })
   }
 
-  const signUp = function (payload) {
-    const { username, password1, password2 } = payload
-
-    axios({
-      method: 'post',
-      url: `${API_URL}/accounts/signup/`,
-      data: {
-        username, password1, password2
-      }
-    })
-      .then((response) => {
+  const signUp = async function (payload) {
+    const { username, password1, password2, nickname, email } = payload
+    try {
+      const response = await axios.post(`${API_URL}/accounts/signup/`, {
+        username, password1, password2, nickname, email
+      })
       console.log('회원가입 성공!')
       const password = password1
 
       logIn({ username, password })
-      })
-      .catch((error) => {
-       console.log('뭔 error')
-      })
+    } catch (error) {
+      console.log('회원가입 실패:', error)
+    }
   }
 
-  const logIn = function (payload) {
+  // const signUp = function (payload) {
+  //   const { username, password1, password2, nickname, email } = payload
+
+  //   axios({
+  //     method: 'post',
+  //     url: `${API_URL}/accounts/signup/`,
+  //     data: {
+  //       username, password1, password2, nickname, email
+  //     }
+  //   })
+  //     .then((response) => {
+  //     console.log('회원가입 성공!')
+  //     const password = password1
+
+  //     logIn({ username, password })
+  //     })
+  //     .catch((error) => {
+  //      console.log('뭔 error')
+  //     })
+  //  }
+
+  const logIn = async function (payload) {
     // 1. 사용자 입력 데이터를 받아
     const { username: loginUser, password } = payload
     // 2. axios로 django에 요청을 보냄

@@ -11,6 +11,10 @@ import UpdateView from '@/views/UpdateView.vue'
 import FinanceView from '@/views/FinanceView.vue'
 import DepositList from '@/components/DepositList.vue'
 import SavingList from '@/components/SavingList.vue'
+import PortfolioView from '@/views/PortfolioView.vue'
+import PortfolioList from '@/components/PortfolioList.vue'
+import PortfolioEdit from '@/components/PortfolioEdit.vue'
+import Profile from '@/components/Profile.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -76,10 +80,33 @@ const router = createRouter({
           component: SavingList
         }
       ]
-    },{
+    },
+    {
       path: '/finance',
       redirect: '/finance/deposit'
-    }
+    },
+    {
+      path: '/portfolio',
+      name: 'PortfolioView',
+      component: PortfolioView,
+      children: [
+        {
+          path: 'portfoliolist',
+          name: 'PortfolioList',
+          component: PortfolioList
+        },
+        {
+          path: 'portfolioedit/:id?',
+          name: 'PortfolioEdit',
+          component: PortfolioEdit
+        },
+        {
+          path: 'profile',
+          name: 'Profile',
+          component: Profile,
+        }
+      ]
+    },
   ]
 })
 

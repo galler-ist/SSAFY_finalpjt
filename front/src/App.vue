@@ -10,6 +10,7 @@
           <RouterLink class="nav-link" :to="{ name: 'BankView' }">Bank</RouterLink>
           <RouterLink class="nav-link" :to="{ name: 'ExchangeView' }">Exchange</RouterLink>
           <RouterLink class="nav-link" :to="{ name: 'DepositList' }">Finance</RouterLink>
+          <RouterLink class="nav-link" :to="{ name: 'PortfolioView' }">Portfolio</RouterLink>
           <RouterLink class="nav-link" :to="{ name: 'ArticleView' }">Articles</RouterLink>
         </div>
         <div class="navbar-nav">
